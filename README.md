@@ -1,9 +1,9 @@
-# xcratch-example
+# xcx-key-events
 example extension for Xcratch ([yokobond/xcratch: Extendable Scratch3 Programming Environment](https://github.com/yokobond/xcratch/))
 
 ## ✨ What You can Do with Xcratch
 
-Open [Xcratch Example](https://yokobond.github.io/xcratch/?project=https://yokobond.github.io/xcratch-example/examples/Xcratch%20Example.sb3) to look at what you can do with Xcratch. 
+Open [Xcratch Example](https://yokobond.github.io/xcratch/?project=https://yokobond.github.io/xcx-key-events/examples/Xcratch%20Example.sb3) to look at what you can do with Xcratch. 
 
 This project using "Xcratch Example" extension which add an extra-block "do it" to normal Scratch. This "do it" block executes string in its input field as a sentence in Javascript and return the result.
 
@@ -21,13 +21,13 @@ cd ./scratch-gui
 npm install
 ```
 
-Download [the latest Xcratch Example Code](https://github.com/yokobond/xcratch-example/archive/master.zip) from [yokobond/xcratch-example](https://github.com/yokobond/xcratch-example). This is the base code to be modified as your extension.
+Download [the latest Xcratch Example Code](https://github.com/yokobond/xcx-key-events/archive/master.zip) from [yokobond/xcx-key-events](https://github.com/yokobond/xcx-key-events). This is the base code to be modified as your extension.
 
-Unzip the downloaded file "xcratch-example-master.zip" and rename extracted folder to your extension repo name.
+Unzip the downloaded file "xcx-key-events-master.zip" and rename extracted folder to your extension repo name.
 
 ```sh
-unzip xcratch-example-master.zip
-mv xcratch-example-master my-extension
+unzip xcx-key-events-master.zip
+mv xcx-key-events-master my-extension
 ```
 
 This code is a [npm](https://www.npmjs.com/) package, so that you need to do `npm install`.
@@ -136,7 +136,7 @@ When this URL was opened in a web browser, Xcratch loads your extension module a
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/yokobond/xcratch-example/issues). 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/yokobond/xcx-key-events/issues). 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
@@ -145,4 +145,4 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2021 [Koji Yokokawa](https://github.com/yokobond).<br />
-This project is [MIT](https://github.com/yokobond/xcratch-example/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/yokobond/xcx-key-events/blob/master/LICENSE) licensed.

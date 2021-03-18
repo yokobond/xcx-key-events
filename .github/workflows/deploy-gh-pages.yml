@@ -11,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: yokobond/xcratch-example
+          repository: yokobond/xcx-key-events
           ref: master
-          path: ./xcratch-example
+          path: ./xcx-key-events
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./xcratch-example
+          publish_dir: ./xcx-key-events
           keep_files: true
