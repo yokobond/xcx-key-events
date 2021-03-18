@@ -29,7 +29,7 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
 /**
  * Scratch 3.0 blocks for example of Xcratch.
  */
-class XcratchExampleBlocks {
+class KeyEventsBlocks {
 
     /**
      * @return {string} - the name of this extension.
@@ -84,9 +84,9 @@ class XcratchExampleBlocks {
     getInfo () {
         this.setupTranslations();
         return {
-            id: XcratchExampleBlocks.EXTENSION_ID,
-            name: XcratchExampleBlocks.EXTENSION_NAME,
-            extensionURL: XcratchExampleBlocks.extensionURL,
+            id: KeyEventsBlocks.EXTENSION_ID,
+            name: KeyEventsBlocks.EXTENSION_NAME,
+            extensionURL: KeyEventsBlocks.extensionURL,
             blockIconURI: blockIconURI,
             showStatusButton: false,
             blocks: [
@@ -145,5 +145,5 @@ const extensionTranslations = {
     }
 };
 
-exports.blockClass = XcratchExampleBlocks; // loadable-extension needs this line.
-module.exports = XcratchExampleBlocks;
+exports.blockClass = KeyEventsBlocks; // loadable-extension needs this line.
+module.exports = KeyEventsBlocks;
