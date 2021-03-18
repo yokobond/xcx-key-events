@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "description": "example extension for Xcratch",
   "scripts": {
-    "register": "node ./scripts/register.js --link -C --id=\"xcratchExample\" --gui=\"../scratch-gui\"",
-    "build": "rimraf ./dist && mkdirp ./dist && node ./scripts/build.js --name=xcratchExample --block=\"./src/block\" --entry=\"./src/entry\" --gui=\"../scratch-gui\" --output=\"./dist\"",
-    "build:debug": "rimraf ./build && mkdirp ./build && node ./scripts/build.js --name=xcratchExample --block=\"./src/block\" --entry=\"./src/entry\" --gui=\"../scratch-gui\" --output=\"./build\" --debug",
+    "register": "node ./scripts/register.js --link -C --id=\"keyEvents\" --gui=\"../scratch-gui\"",
+    "build": "rimraf ./dist && mkdirp ./dist && node ./scripts/build.js --name=keyEvents --block=\"./src/block\" --entry=\"./src/entry\" --gui=\"../scratch-gui\" --output=\"./dist\"",
+    "build:debug": "rimraf ./build && mkdirp ./build && node ./scripts/build.js --name=keyEvents --block=\"./src/block\" --entry=\"./src/entry\" --gui=\"../scratch-gui\" --output=\"./build\" --debug",
     "startDevServer": "cd ../scratch-gui && npm run start -- --https"
   },
   "repository": {

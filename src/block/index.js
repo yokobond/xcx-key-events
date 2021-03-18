@@ -10,14 +10,14 @@ const ArgumentType = require('../../extension-support/argument-type');
  */
 let formatMessage = require('format-message');
 
-const EXTENSION_ID = 'xcratchExample';
+const EXTENSION_ID = 'keyEvents';
 
 /**
  * URL to get this extension as a module.
  * When it was loaded as a module, 'extensionURL' will be replaced a URL which is retrieved from.
  * @type {string}
  */
-let extensionURL = 'https://yokobond.github.io/xcx-key-events/dist/xcratchExample.mjs';
+let extensionURL = 'https://yokobond.github.io/xcx-key-events/dist/keyEvents.mjs';
 
 /**
  * Icon png to be displayed at the left edge of each extension block, encoded as a data URI.
@@ -95,7 +95,7 @@ class XcratchExampleBlocks {
                     blockType: BlockType.REPORTER,
                     blockAllThreads: false,
                     text: formatMessage({
-                        id: 'xcratchExample.doIt',
+                        id: 'keyEvents.doIt',
                         default: 'do it [SCRIPT]',
                         description: 'execute javascript for example'
                     }),
@@ -138,10 +138,10 @@ class XcratchExampleBlocks {
 
 const extensionTranslations = {
     'ja': {
-        'xcratchExample.doIt': '[SCRIPT] を実行する'
+        'keyEvents.doIt': '[SCRIPT] を実行する'
     },
     'ja-Hira': {
-        'xcratchExample.doIt': '[SCRIPT] をじっこうする'
+        'keyEvents.doIt': '[SCRIPT] をじっこうする'
     }
 };
 

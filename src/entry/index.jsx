@@ -1,30 +1,30 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import xcratchExampleIconURL from './entry-icon.png';
-import xcratchExampleInsetIconURL from './inset-icon.svg';
+import keyEventsIconURL from './entry-icon.png';
+import keyEventsInsetIconURL from './inset-icon.svg';
 
 const translationMap = {
     'ja': {
-        'gui.extension.xcratchExample.description': 'Xcratch 拡張の例'
+        'gui.extension.keyEvents.description': 'Xcratch 拡張の例'
     },
     'ja-Hira': {
-        'gui.extension.xcratchExample.description': 'Xcratch (えくすくらっち)かくちょうのれい'
+        'gui.extension.keyEvents.description': 'Xcratch (えくすくらっち)かくちょうのれい'
     }
 };
 
 const entry = {
     name: 'Xcratch Example',
-    extensionId: 'xcratchExample',
-    extensionURL: 'https://yokobond.github.io/xcx-key-events/dist/xcratchExample.mjs',
+    extensionId: 'keyEvents',
+    extensionURL: 'https://yokobond.github.io/xcx-key-events/dist/keyEvents.mjs',
     collaborator: 'Yengawa Lab',
-    iconURL: xcratchExampleIconURL,
-    insetIconURL: xcratchExampleInsetIconURL,
+    iconURL: keyEventsIconURL,
+    insetIconURL: keyEventsInsetIconURL,
     description: (
         <FormattedMessage
             defaultMessage="example extension for Xcratch"
             description="Description for example extension for Xcratch"
-            id="gui.extension.xcratchExample.description"
+            id="gui.extension.keyEvents.description"
         />
     ),
     featured: true,
