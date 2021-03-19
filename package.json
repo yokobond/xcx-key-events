@@ -1,7 +1,7 @@
 {
   "name": "xcx-key-events",
   "version": "0.1.0",
-  "description": "example extension for Xcratch",
+  "description": "keyboard events extension for Xcratch",
   "scripts": {
     "register": "node ./scripts/register.js --link -C --id=\"keyEvents\" --gui=\"../scratch-gui\"",
     "build": "rimraf ./dist && mkdirp ./dist && node ./scripts/build.js --name=keyEvents --block=\"./src/block\" --entry=\"./src/entry\" --gui=\"../scratch-gui\" --output=\"./dist\"",
