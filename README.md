@@ -3,9 +3,9 @@ example extension for Xcratch ([yokobond/xcratch: Extendable Scratch3 Programmin
 
 ## ✨ What You can Do with Xcratch
 
-Open [Xcratch Example](https://yokobond.github.io/xcratch/?project=https://yokobond.github.io/xcx-key-events/examples/Xcratch%20Example.sb3) to look at what you can do with Xcratch. 
+Open [Key Events](https://yokobond.github.io/xcratch/?project=https://yokobond.github.io/xcx-key-events/examples/Xcratch%20Example.sb3) to look at what you can do with Xcratch. 
 
-This project using "Xcratch Example" extension which add an extra-block "do it" to normal Scratch. This "do it" block executes string in its input field as a sentence in Javascript and return the result.
+This project using "Key Events" extension which add an extra-block "do it" to normal Scratch. This "do it" block executes string in its input field as a sentence in Javascript and return the result.
 
 You can make own extension based on this repo and publish a project using your extension on the web. 
 
@@ -21,7 +21,7 @@ cd ./scratch-gui
 npm install
 ```
 
-Download [the latest Xcratch Example Code](https://github.com/yokobond/xcx-key-events/archive/master.zip) from [yokobond/xcx-key-events](https://github.com/yokobond/xcx-key-events). This is the base code to be modified as your extension.
+Download [the latest Key Events Code](https://github.com/yokobond/xcx-key-events/archive/master.zip) from [yokobond/xcx-key-events](https://github.com/yokobond/xcx-key-events). This is the base code to be modified as your extension.
 
 Unzip the downloaded file "xcx-key-events-master.zip" and rename extracted folder to your extension repo name.
 

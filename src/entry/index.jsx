@@ -14,7 +14,7 @@ const translationMap = {
 };
 
 const entry = {
-    name: 'Xcratch Example',
+    name: 'Key Events',
     extensionId: 'keyEvents',
     extensionURL: 'https://yokobond.github.io/xcx-key-events/dist/keyEvents.mjs',
     collaborator: 'Yengawa Lab',

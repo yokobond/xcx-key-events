@@ -35,7 +35,7 @@ class KeyEventsBlocks {
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'Xcratch Example';
+        return 'Key Events';
     }
 
     /**
@@ -62,7 +62,7 @@ class KeyEventsBlocks {
     }
 
     /**
-     * Construct a set of blocks for Xcratch Example.
+     * Construct a set of blocks for Key Events.
      * @param {Runtime} runtime - the Scratch 3.0 runtime.
      */
     constructor (runtime) {
