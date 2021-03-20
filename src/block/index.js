@@ -118,7 +118,7 @@ class KeyEventsBlocks {
                         },
                         HOLD_TIME: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: '0'
+                            defaultValue: '100'
                         }
                     }
                 }
