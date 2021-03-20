@@ -257,10 +257,20 @@ class KeyEventsBlocks {
 
 const extensionTranslations = {
     'ja': {
-        'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] ミリ秒間押す'
+        'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] ミリ秒間押す',
+        'keyEvents.keyValue.space': 'スペース',
+        'keyEvents.keyValue.arrowUp': '上向き矢印',
+        'keyEvents.keyValue.arrowDown': '下向き矢印',
+        'keyEvents.keyValue.arrowRight': '右向き矢印',
+        'keyEvents.keyValue.arrowLeft': '左向き矢印'
     },
     'ja-Hira': {
-        'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] みりびょうかんおす'
+        'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] みりびょうかんおす',
+        'keyEvents.keyValue.space': 'スペース',
+        'keyEvents.keyValue.arrowUp': 'うえむきやじるし',
+        'keyEvents.keyValue.arrowDown': 'したむきやじるし',
+        'keyEvents.keyValue.arrowRight': 'みぎむきやじるし',
+        'keyEvents.keyValue.arrowLeft': 'ひだりむきやじるし'
     }
 };
 
