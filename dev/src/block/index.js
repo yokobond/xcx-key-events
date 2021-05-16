@@ -198,8 +198,17 @@ class KeyEventsBlocks {
         return menu;
     }
 
+    /**
+     * Dispatch events of key down and repeat while the time then return after the key up.
+     * @param {object} args - the block's arguments.
+     * @param {string} args.KEY_VALUE - key value of the event to dispatch.
+     * @param {number} args.HOLD_TIME - duration time to hold the key.
+     * @return {Promise} - a Promise that resolves after the key up event.
+     */
     pressKeyWhile (args) {
         const keyValue = args.KEY_VALUE;
+        const holdTime = parseInt(args.HOLD_TIME, 10);
+        const keyRepeat = true; // It's always repeating to simulate real key events.
         if (this.keyProcesses[keyValue]) {
             this.stopKeyProcess(keyValue);
         }
@@ -208,23 +217,27 @@ class KeyEventsBlocks {
         this.keyProcesses[keyValue] = keyProcess;
         const repeatDelayTime = 200;
         const repeatIntervalTime = 100;
-        keyProcess.repeatStarter = setTimeout(() => {
-            keyProcess.keyRepeater = setInterval(() => {
-                document.dispatchEvent(new KeyboardEvent('keydown', {key: keyValue, repeat: true}));
-            }, repeatIntervalTime);
-        }, repeatDelayTime);
+        if (keyRepeat) {
+            keyProcess.repeatStarter = setTimeout(() => {
+                keyProcess.keyRepeater = setInterval(() => {
+                    document.dispatchEvent(new KeyboardEvent('keydown', {key: keyValue, repeat: true}));
+                }, repeatIntervalTime);
+            }, repeatDelayTime);
+        }
         return new Promise(resolve => {
             const keyProcesses = this.keyProcesses;
             keyProcess.keyEndUp = () => {
                 if (!keyProcesses[keyValue]) return;
-                clearTimeout(keyProcess.repeatStarter);
-                if (keyProcess.keyRepeater) clearInterval(keyProcess.keyRepeater);
+                if (keyProcess.repeatStarter) {
+                    clearTimeout(keyProcess.repeatStarter);
+                    if (keyProcess.keyRepeater) clearInterval(keyProcess.keyRepeater);
+                }
                 document.dispatchEvent(new KeyboardEvent('keyup', {key: keyValue}));
                 clearTimeout(keyProcess.keyEndUpTimeout);
                 delete keyProcesses[keyValue];
                 resolve();
             };
-            keyProcess.keyEndUpTimeout = setTimeout(() => keyProcess.keyEndUp(), args.HOLD_TIME);
+            keyProcess.keyEndUpTimeout = setTimeout(() => keyProcess.keyEndUp(), holdTime);
         });
     }
 
