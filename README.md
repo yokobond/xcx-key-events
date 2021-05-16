@@ -19,7 +19,7 @@ https://yokobond.github.io/xcx-key-events/dev/dist/keyEvents.mjs
 
 👤 **Koji Yokokawa**
 
-* Website: http://www.yengawa.com/
+* Website: http://lab.yengawa.com/
 * Github: [@yokobond](https://github.com/yokobond)
 
 ## 🤝 Contributing
