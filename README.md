@@ -3,7 +3,7 @@ keyboard events extension for Xcratch ([yokobond/xcratch: Extendable Scratch3 Pr
 
 ## ✨ What You can Do with This Extension
 
-Open [Example Project](https://yokobond.github.io/xcratch/?project=https://yokobond.github.io/xcx-key-events/examples/keyEvents.sb3) to look at what you can do with "Key Events" extension. 
+Open [Example Project](https://xcratch.github.io/editor/#https://yokobond.github.io/xcx-key-events/examples/keyEvents.sb3) to look at what you can do with "Key Events" extension. 
 
 This project using "Key Events" extension which add an extra-block "press key while 0 ms" to normal Scratch. This "press key while 0 ms" block dispatch a key event and simulate held the key which sends key-down events repeatedly while the time.
 
@@ -19,7 +19,7 @@ https://yokobond.github.io/xcx-key-events/dev/dist/keyEvents.mjs
 
 👤 **Koji Yokokawa**
 
-* Website: http://www.yengawa.com/
+* Website: http://lab.yengawa.com/
 * Github: [@yokobond](https://github.com/yokobond)
 
 ## 🤝 Contributing
