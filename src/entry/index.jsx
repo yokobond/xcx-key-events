@@ -6,10 +6,10 @@ import keyEventsInsetIconURL from './inset-icon.svg';
 
 const translationMap = {
     'ja': {
-        'gui.extension.keyEvents.description': 'キーボードイベントを拡張する'
+        'gui.extension.keyEvents.description': 'キーボードを押す'
     },
     'ja-Hira': {
-        'gui.extension.keyEvents.description': 'キーボードイベントをかくちょうする'
+        'gui.extension.keyEvents.description': 'キーボード を おす'
     }
 };
 
@@ -22,11 +22,12 @@ const entry = {
     insetIconURL: keyEventsInsetIconURL,
     description: (
         <FormattedMessage
-            defaultMessage="Extended keyboard events"
+            defaultMessage="Press keyboard keys"
             description="Description for keyEvents extension for Xcratch"
             id="gui.extension.keyEvents.description"
         />
     ),
+    tags: ['function', 'key', 'keyboard'],
     featured: true,
     disabled: false,
     bluetoothRequired: false,
