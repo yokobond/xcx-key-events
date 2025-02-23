@@ -12,7 +12,7 @@ This project using "Key Events" extension which add an extra-block "press key wh
 Open [Xcratch](https://github.com/yokobond/xcratch/) and choose "Extension Loader" in the extension list then input the URL as follows. 
 
 ```
-https://yokobond.github.io/xcx-key-events/dev/dist/keyEvents.mjs
+https://yokobond.github.io/xcx-key-events/dist/keyEvents.mjs
 ```
 
 ## Author
