@@ -387,464 +387,57 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
   return to;
 };
 
-var emptyObject = {};
-
-{
-  Object.freeze(emptyObject);
-}
-
-var emptyObject_1 = emptyObject;
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-
-
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-var emptyFunction_1 = emptyFunction;
-
-var q = "function" === typeof Symbol && Symbol["for"],
-    r = q ? Symbol["for"]("react.element") : 60103,
-    t = q ? Symbol["for"]("react.call") : 60104,
-    u = q ? Symbol["for"]("react.return") : 60105,
-    v = q ? Symbol["for"]("react.portal") : 60106,
-    w = q ? Symbol["for"]("react.fragment") : 60107,
-    x = "function" === typeof Symbol && Symbol.iterator;
-
-function y(a) {
-  for (var b = arguments.length - 1, e = "Minified React error #" + a + "; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d" + a, c = 0; c < b; c++) {
-    e += "\x26args[]\x3d" + encodeURIComponent(arguments[c + 1]);
+function C(a) {
+  for (var b = "https://reactjs.org/docs/error-decoder.html?invariant=" + a, c = 1; c < arguments.length; c++) {
+    b += "&args[]=" + encodeURIComponent(arguments[c]);
   }
 
-  b = Error(e + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");
-  b.name = "Invariant Violation";
-  b.framesToPop = 1;
-  throw b;
+  return "Minified React error #" + a + "; visit " + b + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
 }
 
-var z = {
+var D = {
   isMounted: function isMounted() {
     return !1;
   },
   enqueueForceUpdate: function enqueueForceUpdate() {},
   enqueueReplaceState: function enqueueReplaceState() {},
   enqueueSetState: function enqueueSetState() {}
-};
+},
+    E = {};
 
-function A(a, b, e) {
+function F(a, b, c) {
   this.props = a;
   this.context = b;
-  this.refs = emptyObject_1;
-  this.updater = e || z;
+  this.refs = E;
+  this.updater = c || D;
 }
 
-A.prototype.isReactComponent = {};
+F.prototype.isReactComponent = {};
 
-A.prototype.setState = function (a, b) {
-  "object" !== _typeof$1(a) && "function" !== typeof a && null != a ? y("85") : void 0;
+F.prototype.setState = function (a, b) {
+  if ("object" !== _typeof$1(a) && "function" !== typeof a && null != a) throw Error(C(85));
   this.updater.enqueueSetState(this, a, b, "setState");
 };
 
-A.prototype.forceUpdate = function (a) {
+F.prototype.forceUpdate = function (a) {
   this.updater.enqueueForceUpdate(this, a, "forceUpdate");
 };
 
-function B(a, b, e) {
+function G() {}
+
+G.prototype = F.prototype;
+
+function H(a, b, c) {
   this.props = a;
   this.context = b;
-  this.refs = emptyObject_1;
-  this.updater = e || z;
+  this.refs = E;
+  this.updater = c || D;
 }
 
-function C() {}
-
-C.prototype = A.prototype;
-var D = B.prototype = new C();
-D.constructor = B;
-objectAssign(D, A.prototype);
-D.isPureReactComponent = !0;
-
-function E(a, b, e) {
-  this.props = a;
-  this.context = b;
-  this.refs = emptyObject_1;
-  this.updater = e || z;
-}
-
-var F = E.prototype = new C();
-F.constructor = E;
-objectAssign(F, A.prototype);
-F.unstable_isAsyncReactComponent = !0;
-
-F.render = function () {
-  return this.props.children;
-};
-
-var G = {
-  current: null
-},
-    H = Object.prototype.hasOwnProperty,
-    I = {
-  key: !0,
-  ref: !0,
-  __self: !0,
-  __source: !0
-};
-
-function J(a, b, e) {
-  var c,
-      d = {},
-      g = null,
-      k = null;
-  if (null != b) for (c in void 0 !== b.ref && (k = b.ref), void 0 !== b.key && (g = "" + b.key), b) {
-    H.call(b, c) && !I.hasOwnProperty(c) && (d[c] = b[c]);
-  }
-  var f = arguments.length - 2;
-  if (1 === f) d.children = e;else if (1 < f) {
-    for (var h = Array(f), l = 0; l < f; l++) {
-      h[l] = arguments[l + 2];
-    }
-
-    d.children = h;
-  }
-  if (a && a.defaultProps) for (c in f = a.defaultProps, f) {
-    void 0 === d[c] && (d[c] = f[c]);
-  }
-  return {
-    $$typeof: r,
-    type: a,
-    key: g,
-    ref: k,
-    props: d,
-    _owner: G.current
-  };
-}
-
-function K(a) {
-  return "object" === _typeof$1(a) && null !== a && a.$$typeof === r;
-}
-
-function escape$1(a) {
-  var b = {
-    "\x3d": "\x3d0",
-    ":": "\x3d2"
-  };
-  return "$" + ("" + a).replace(/[=:]/g, function (a) {
-    return b[a];
-  });
-}
-
-var L = /\/+/g,
-    M = [];
-
-function N(a, b, e, c) {
-  if (M.length) {
-    var d = M.pop();
-    d.result = a;
-    d.keyPrefix = b;
-    d.func = e;
-    d.context = c;
-    d.count = 0;
-    return d;
-  }
-
-  return {
-    result: a,
-    keyPrefix: b,
-    func: e,
-    context: c,
-    count: 0
-  };
-}
-
-function O(a) {
-  a.result = null;
-  a.keyPrefix = null;
-  a.func = null;
-  a.context = null;
-  a.count = 0;
-  10 > M.length && M.push(a);
-}
-
-function P(a, b, e, c) {
-  var d = _typeof$1(a);
-
-  if ("undefined" === d || "boolean" === d) a = null;
-  var g = !1;
-  if (null === a) g = !0;else switch (d) {
-    case "string":
-    case "number":
-      g = !0;
-      break;
-
-    case "object":
-      switch (a.$$typeof) {
-        case r:
-        case t:
-        case u:
-        case v:
-          g = !0;
-      }
-
-  }
-  if (g) return e(c, a, "" === b ? "." + Q(a, 0) : b), 1;
-  g = 0;
-  b = "" === b ? "." : b + ":";
-  if (Array.isArray(a)) for (var k = 0; k < a.length; k++) {
-    d = a[k];
-    var f = b + Q(d, k);
-    g += P(d, f, e, c);
-  } else if (null === a || "undefined" === typeof a ? f = null : (f = x && a[x] || a["@@iterator"], f = "function" === typeof f ? f : null), "function" === typeof f) for (a = f.call(a), k = 0; !(d = a.next()).done;) {
-    d = d.value, f = b + Q(d, k++), g += P(d, f, e, c);
-  } else "object" === d && (e = "" + a, y("31", "[object Object]" === e ? "object with keys {" + Object.keys(a).join(", ") + "}" : e, ""));
-  return g;
-}
-
-function Q(a, b) {
-  return "object" === _typeof$1(a) && null !== a && null != a.key ? escape$1(a.key) : b.toString(36);
-}
-
-function R(a, b) {
-  a.func.call(a.context, b, a.count++);
-}
-
-function S(a, b, e) {
-  var c = a.result,
-      d = a.keyPrefix;
-  a = a.func.call(a.context, b, a.count++);
-  Array.isArray(a) ? T(a, c, e, emptyFunction_1.thatReturnsArgument) : null != a && (K(a) && (b = d + (!a.key || b && b.key === a.key ? "" : ("" + a.key).replace(L, "$\x26/") + "/") + e, a = {
-    $$typeof: r,
-    type: a.type,
-    key: b,
-    ref: a.ref,
-    props: a.props,
-    _owner: a._owner
-  }), c.push(a));
-}
-
-function T(a, b, e, c, d) {
-  var g = "";
-  null != e && (g = ("" + e).replace(L, "$\x26/") + "/");
-  b = N(b, g, c, d);
-  null == a || P(a, "", S, b);
-  O(b);
-}
-
-var U = {
-  Children: {
-    map: function map(a, b, e) {
-      if (null == a) return a;
-      var c = [];
-      T(a, c, null, b, e);
-      return c;
-    },
-    forEach: function forEach(a, b, e) {
-      if (null == a) return a;
-      b = N(null, null, b, e);
-      null == a || P(a, "", R, b);
-      O(b);
-    },
-    count: function count(a) {
-      return null == a ? 0 : P(a, "", emptyFunction_1.thatReturnsNull, null);
-    },
-    toArray: function toArray(a) {
-      var b = [];
-      T(a, b, null, emptyFunction_1.thatReturnsArgument);
-      return b;
-    },
-    only: function only(a) {
-      K(a) ? void 0 : y("143");
-      return a;
-    }
-  },
-  Component: A,
-  PureComponent: B,
-  unstable_AsyncComponent: E,
-  Fragment: w,
-  createElement: J,
-  cloneElement: function cloneElement(a, b, e) {
-    var c = objectAssign({}, a.props),
-        d = a.key,
-        g = a.ref,
-        k = a._owner;
-
-    if (null != b) {
-      void 0 !== b.ref && (g = b.ref, k = G.current);
-      void 0 !== b.key && (d = "" + b.key);
-      if (a.type && a.type.defaultProps) var f = a.type.defaultProps;
-
-      for (h in b) {
-        H.call(b, h) && !I.hasOwnProperty(h) && (c[h] = void 0 === b[h] && void 0 !== f ? f[h] : b[h]);
-      }
-    }
-
-    var h = arguments.length - 2;
-    if (1 === h) c.children = e;else if (1 < h) {
-      f = Array(h);
-
-      for (var l = 0; l < h; l++) {
-        f[l] = arguments[l + 2];
-      }
-
-      c.children = f;
-    }
-    return {
-      $$typeof: r,
-      type: a.type,
-      key: d,
-      ref: g,
-      props: c,
-      _owner: k
-    };
-  },
-  createFactory: function createFactory(a) {
-    var b = J.bind(null, a);
-    b.type = a;
-    return b;
-  },
-  isValidElement: K,
-  version: "16.2.0",
-  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: {
-    ReactCurrentOwner: G,
-    assign: objectAssign
-  }
-},
-    V = Object.freeze({
-  default: U
-}),
-    W = V && U || V;
-W["default"] ? W["default"] : W;
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-
-var validateFormat = function validateFormat(format) {};
-
-{
-  validateFormat = function validateFormat(format) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  };
-}
-
-function invariant$1(condition, format, a, b, c, d, e, f) {
-  validateFormat(format);
-
-  if (!condition) {
-    var error;
-
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-
-    throw error;
-  }
-}
-
-var invariant_1 = invariant$1;
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-
-var warning = emptyFunction_1;
-
-{
-  var printWarning$2 = function printWarning(format) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    var argIndex = 0;
-    var message = 'Warning: ' + format.replace(/%s/g, function () {
-      return args[argIndex++];
-    });
-
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-
-  warning = function warning(condition, format) {
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.indexOf('Failed Composite propType: ') === 0) {
-      return; // Ignore CompositeComponent proptype check.
-    }
-
-    if (!condition) {
-      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-        args[_key2 - 2] = arguments[_key2];
-      }
-
-      printWarning$2.apply(undefined, [format].concat(args));
-    }
-  };
-}
-
-var warning_1 = warning;
+var I = H.prototype = new G();
+I.constructor = H;
+objectAssign(I, F.prototype);
+I.isPureReactComponent = !0;
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -856,12 +449,14 @@ var warning_1 = warning;
 var ReactPropTypesSecret$1 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 var ReactPropTypesSecret_1 = ReactPropTypesSecret$1;
 
+var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
+
 var printWarning$1 = function printWarning() {};
 
 {
   var ReactPropTypesSecret = ReactPropTypesSecret_1;
   var loggedTypeFailures = {};
-  var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
+  var has = has$1;
 
   printWarning$1 = function printWarning(text) {
     var message = 'Warning: ' + text;
@@ -875,7 +470,9 @@ var printWarning$1 = function printWarning() {};
       // This error was thrown as a convenience so that you can use this stack
       // to find the callsite that caused this warning to fire.
       throw new Error(message);
-    } catch (x) {}
+    } catch (x) {
+      /**/
+    }
   };
 }
 /**
@@ -894,7 +491,7 @@ var printWarning$1 = function printWarning() {};
 function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
   {
     for (var typeSpecName in typeSpecs) {
-      if (has$1(typeSpecs, typeSpecName)) {
+      if (has(typeSpecs, typeSpecName)) {
         var error; // Prop type validation may throw. In case they do, we don't want to
         // fail the render phase where it didn't fail before. So we log it.
         // After these have been cleaned up, we'll let them throw.
@@ -903,7 +500,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
           // This is intentionally an invariant that gets caught. It's the same
           // behavior as without this statement except with a better message.
           if (typeof typeSpecs[typeSpecName] !== 'function') {
-            var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + _typeof$1(typeSpecs[typeSpecName]) + '`.');
+            var err = Error((componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + _typeof$1(typeSpecs[typeSpecName]) + '`.' + 'This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.');
             err.name = 'Invariant Violation';
             throw err;
           }
@@ -943,32 +540,40 @@ checkPropTypes.resetWarningCache = function () {
 
 var checkPropTypes_1 = checkPropTypes;
 
-var react_development = createCommonjsModule(function (module) {
+var react_development = createCommonjsModule(function (module, exports) {
 
   {
     (function () {
 
       var _assign = objectAssign;
-      var emptyObject = emptyObject_1;
-      var invariant = invariant_1;
-      var warning = warning_1;
-      var emptyFunction = emptyFunction_1;
-      var checkPropTypes = checkPropTypes_1; // TODO: this is special because it gets imported during build.
-
-      var ReactVersion = '16.2.0'; // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+      var checkPropTypes = checkPropTypes_1;
+      var ReactVersion = '16.14.0'; // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
       // nor polyfill, then a plain number is used for performance.
 
-      var hasSymbol = typeof Symbol === 'function' && Symbol['for'];
-      var REACT_ELEMENT_TYPE = hasSymbol ? Symbol['for']('react.element') : 0xeac7;
-      var REACT_CALL_TYPE = hasSymbol ? Symbol['for']('react.call') : 0xeac8;
-      var REACT_RETURN_TYPE = hasSymbol ? Symbol['for']('react.return') : 0xeac9;
-      var REACT_PORTAL_TYPE = hasSymbol ? Symbol['for']('react.portal') : 0xeaca;
-      var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol['for']('react.fragment') : 0xeacb;
+      var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+      var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+      var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+      var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+      var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+      var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+      var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+      var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+
+      var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+      var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+      var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+      var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+      var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+      var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+      var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+      var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+      var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+      var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
       var MAYBE_ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
       var FAUX_ITERATOR_SYMBOL = '@@iterator';
 
       function getIteratorFn(maybeIterable) {
-        if (maybeIterable === null || typeof maybeIterable === 'undefined') {
+        if (maybeIterable === null || _typeof$1(maybeIterable) !== 'object') {
           return null;
         }
 
@@ -981,80 +586,288 @@ var react_development = createCommonjsModule(function (module) {
         return null;
       }
       /**
-       * WARNING: DO NOT manually require this module.
-       * This is a replacement for `invariant(...)` used by the error code system
-       * and will _only_ be required by the corresponding babel pass.
-       * It always throws.
+       * Keeps track of the current dispatcher.
        */
 
+
+      var ReactCurrentDispatcher = {
+        /**
+         * @internal
+         * @type {ReactComponent}
+         */
+        current: null
+      };
       /**
-       * Forked from fbjs/warning:
-       * https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/__forks__/warning.js
-       *
-       * Only change is we use console.warn instead of console.error,
-       * and do nothing when 'console' is not supported.
-       * This really simplifies the code.
-       * ---
-       * Similar to invariant but only logs a warning if the condition is not met.
-       * This can be used to log issues in development environments in critical
-       * paths. Removing the logging code for production environments will keep the
-       * same logic and follow the same code paths.
+       * Keeps track of the current batch's configuration such as how long an update
+       * should suspend for if it needs to.
        */
 
+      var ReactCurrentBatchConfig = {
+        suspense: null
+      };
+      /**
+       * Keeps track of the current owner.
+       *
+       * The current owner is the component who should own any components that are
+       * currently being constructed.
+       */
 
-      var lowPriorityWarning = function lowPriorityWarning() {};
+      var ReactCurrentOwner = {
+        /**
+         * @internal
+         * @type {ReactComponent}
+         */
+        current: null
+      };
+      var BEFORE_SLASH_RE = /^(.*)[\\\/]/;
+
+      function describeComponentFrame(name, source, ownerName) {
+        var sourceInfo = '';
+
+        if (source) {
+          var path = source.fileName;
+          var fileName = path.replace(BEFORE_SLASH_RE, '');
+          {
+            // In DEV, include code for a common special case:
+            // prefer "folder/index.js" instead of just "index.js".
+            if (/^index\./.test(fileName)) {
+              var match = path.match(BEFORE_SLASH_RE);
+
+              if (match) {
+                var pathBeforeSlash = match[1];
+
+                if (pathBeforeSlash) {
+                  var folderName = pathBeforeSlash.replace(BEFORE_SLASH_RE, '');
+                  fileName = folderName + '/' + fileName;
+                }
+              }
+            }
+          }
+          sourceInfo = ' (at ' + fileName + ':' + source.lineNumber + ')';
+        } else if (ownerName) {
+          sourceInfo = ' (created by ' + ownerName + ')';
+        }
+
+        return '\n    in ' + (name || 'Unknown') + sourceInfo;
+      }
+
+      var Resolved = 1;
+
+      function refineResolvedLazyComponent(lazyComponent) {
+        return lazyComponent._status === Resolved ? lazyComponent._result : null;
+      }
+
+      function getWrappedName(outerType, innerType, wrapperName) {
+        var functionName = innerType.displayName || innerType.name || '';
+        return outerType.displayName || (functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName);
+      }
+
+      function getComponentName(type) {
+        if (type == null) {
+          // Host root, text node or just invalid type.
+          return null;
+        }
+
+        {
+          if (typeof type.tag === 'number') {
+            error('Received an unexpected object in getComponentName(). ' + 'This is likely a bug in React. Please file an issue.');
+          }
+        }
+
+        if (typeof type === 'function') {
+          return type.displayName || type.name || null;
+        }
+
+        if (typeof type === 'string') {
+          return type;
+        }
+
+        switch (type) {
+          case REACT_FRAGMENT_TYPE:
+            return 'Fragment';
+
+          case REACT_PORTAL_TYPE:
+            return 'Portal';
+
+          case REACT_PROFILER_TYPE:
+            return "Profiler";
+
+          case REACT_STRICT_MODE_TYPE:
+            return 'StrictMode';
+
+          case REACT_SUSPENSE_TYPE:
+            return 'Suspense';
+
+          case REACT_SUSPENSE_LIST_TYPE:
+            return 'SuspenseList';
+        }
+
+        if (_typeof$1(type) === 'object') {
+          switch (type.$$typeof) {
+            case REACT_CONTEXT_TYPE:
+              return 'Context.Consumer';
+
+            case REACT_PROVIDER_TYPE:
+              return 'Context.Provider';
+
+            case REACT_FORWARD_REF_TYPE:
+              return getWrappedName(type, type.render, 'ForwardRef');
+
+            case REACT_MEMO_TYPE:
+              return getComponentName(type.type);
+
+            case REACT_BLOCK_TYPE:
+              return getComponentName(type.render);
+
+            case REACT_LAZY_TYPE:
+              {
+                var thenable = type;
+                var resolvedThenable = refineResolvedLazyComponent(thenable);
+
+                if (resolvedThenable) {
+                  return getComponentName(resolvedThenable);
+                }
+
+                break;
+              }
+          }
+        }
+
+        return null;
+      }
+
+      var ReactDebugCurrentFrame = {};
+      var currentlyValidatingElement = null;
+
+      function setCurrentlyValidatingElement(element) {
+        {
+          currentlyValidatingElement = element;
+        }
+      }
 
       {
-        var printWarning = function printWarning(format) {
-          for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        // Stack implementation injected by the current renderer.
+        ReactDebugCurrentFrame.getCurrentStack = null;
+
+        ReactDebugCurrentFrame.getStackAddendum = function () {
+          var stack = ''; // Add an extra top frame while an element is being validated
+
+          if (currentlyValidatingElement) {
+            var name = getComponentName(currentlyValidatingElement.type);
+            var owner = currentlyValidatingElement._owner;
+            stack += describeComponentFrame(name, currentlyValidatingElement._source, owner && getComponentName(owner.type));
+          } // Delegate to the injected renderer-specific implementation
+
+
+          var impl = ReactDebugCurrentFrame.getCurrentStack;
+
+          if (impl) {
+            stack += impl() || '';
+          }
+
+          return stack;
+        };
+      }
+      /**
+       * Used by act() to track whether you're inside an act() scope.
+       */
+
+      var IsSomeRendererActing = {
+        current: false
+      };
+      var ReactSharedInternals = {
+        ReactCurrentDispatcher: ReactCurrentDispatcher,
+        ReactCurrentBatchConfig: ReactCurrentBatchConfig,
+        ReactCurrentOwner: ReactCurrentOwner,
+        IsSomeRendererActing: IsSomeRendererActing,
+        // Used by renderers to avoid bundling object-assign twice in UMD bundles:
+        assign: _assign
+      };
+      {
+        _assign(ReactSharedInternals, {
+          // These should not be included in production.
+          ReactDebugCurrentFrame: ReactDebugCurrentFrame,
+          // Shim for React DOM 16.0.0 which still destructured (but not used) this.
+          // TODO: remove in React 17.0.
+          ReactComponentTreeHook: {}
+        });
+      } // by calls to these methods by a Babel plugin.
+      //
+      // In PROD (or in packages without access to React internals),
+      // they are left as they are instead.
+
+      function warn(format) {
+        {
+          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
             args[_key - 1] = arguments[_key];
           }
 
-          var argIndex = 0;
-          var message = 'Warning: ' + format.replace(/%s/g, function () {
-            return args[argIndex++];
-          });
+          printWarning('warn', format, args);
+        }
+      }
 
-          if (typeof console !== 'undefined') {
-            console.warn(message);
+      function error(format) {
+        {
+          for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+            args[_key2 - 1] = arguments[_key2];
           }
+
+          printWarning('error', format, args);
+        }
+      }
+
+      function printWarning(level, format, args) {
+        // When changing this logic, you might want to also
+        // update consoleWithStackDev.www.js as well.
+        {
+          var hasExistingStack = args.length > 0 && typeof args[args.length - 1] === 'string' && args[args.length - 1].indexOf('\n    in') === 0;
+
+          if (!hasExistingStack) {
+            var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
+            var stack = ReactDebugCurrentFrame.getStackAddendum();
+
+            if (stack !== '') {
+              format += '%s';
+              args = args.concat([stack]);
+            }
+          }
+
+          var argsWithFormat = args.map(function (item) {
+            return '' + item;
+          }); // Careful: RN currently depends on this prefix
+
+          argsWithFormat.unshift('Warning: ' + format); // We intentionally don't use spread (or .apply) directly because it
+          // breaks IE9: https://github.com/facebook/react/issues/13610
+          // eslint-disable-next-line react-internal/no-production-logging
+
+          Function.prototype.apply.call(console[level], console, argsWithFormat);
 
           try {
             // --- Welcome to debugging React ---
             // This error was thrown as a convenience so that you can use this stack
             // to find the callsite that caused this warning to fire.
+            var argIndex = 0;
+            var message = 'Warning: ' + format.replace(/%s/g, function () {
+              return args[argIndex++];
+            });
             throw new Error(message);
           } catch (x) {}
-        };
-
-        lowPriorityWarning = function lowPriorityWarning(condition, format) {
-          if (format === undefined) {
-            throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-          }
-
-          if (!condition) {
-            for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-              args[_key2 - 2] = arguments[_key2];
-            }
-
-            printWarning.apply(undefined, [format].concat(args));
-          }
-        };
+        }
       }
-      var lowPriorityWarning$1 = lowPriorityWarning;
+
       var didWarnStateUpdateForUnmountedComponent = {};
 
       function warnNoop(publicInstance, callerName) {
         {
-          var constructor = publicInstance.constructor;
-          var componentName = constructor && (constructor.displayName || constructor.name) || 'ReactClass';
-          var warningKey = componentName + '.' + callerName;
+          var _constructor = publicInstance.constructor;
+          var componentName = _constructor && (_constructor.displayName || _constructor.name) || 'ReactClass';
+          var warningKey = componentName + "." + callerName;
 
           if (didWarnStateUpdateForUnmountedComponent[warningKey]) {
             return;
           }
 
-          warning(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op.\n\nPlease check the code for the %s component.', callerName, callerName, componentName);
+          error("Can't call %s on a component that is not yet mounted. " + 'This is a no-op, but it might indicate a bug in your application. ' + 'Instead, assign to `this.state` directly or define a `state = {};` ' + 'class property with the desired state in the %s component.', callerName, componentName);
           didWarnStateUpdateForUnmountedComponent[warningKey] = true;
         }
       }
@@ -1127,13 +940,18 @@ var react_development = createCommonjsModule(function (module) {
           warnNoop(publicInstance, 'setState');
         }
       };
+      var emptyObject = {};
+      {
+        Object.freeze(emptyObject);
+      }
       /**
        * Base class helpers for the updating state of a component.
        */
 
       function Component(props, context, updater) {
         this.props = props;
-        this.context = context;
+        this.context = context; // If a component has string refs, we will assign a different object later.
+
         this.refs = emptyObject; // We initialize the default updater but the real one gets injected by the
         // renderer.
 
@@ -1168,7 +986,12 @@ var react_development = createCommonjsModule(function (module) {
        */
 
       Component.prototype.setState = function (partialState, callback) {
-        !(_typeof$1(partialState) === 'object' || typeof partialState === 'function' || partialState == null) ? invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') : void 0;
+        if (!(_typeof$1(partialState) === 'object' || typeof partialState === 'function' || partialState == null)) {
+          {
+            throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
+          }
+        }
+
         this.updater.enqueueSetState(this, partialState, callback, 'setState');
       };
       /**
@@ -1206,7 +1029,7 @@ var react_development = createCommonjsModule(function (module) {
         var defineDeprecationWarning = function defineDeprecationWarning(methodName, info) {
           Object.defineProperty(Component.prototype, methodName, {
             get: function get() {
-              lowPriorityWarning$1(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]);
+              warn('%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]);
               return undefined;
             }
           });
@@ -1218,65 +1041,39 @@ var react_development = createCommonjsModule(function (module) {
           }
         }
       }
-      /**
-       * Base class helpers for the updating state of a component.
-       */
-
-      function PureComponent(props, context, updater) {
-        // Duplicated from Component.
-        this.props = props;
-        this.context = context;
-        this.refs = emptyObject; // We initialize the default updater but the real one gets injected by the
-        // renderer.
-
-        this.updater = updater || ReactNoopUpdateQueue;
-      }
 
       function ComponentDummy() {}
 
       ComponentDummy.prototype = Component.prototype;
+      /**
+       * Convenience component with default shallow equality check for sCU.
+       */
+
+      function PureComponent(props, context, updater) {
+        this.props = props;
+        this.context = context; // If a component has string refs, we will assign a different object later.
+
+        this.refs = emptyObject;
+        this.updater = updater || ReactNoopUpdateQueue;
+      }
+
       var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
       pureComponentPrototype.constructor = PureComponent; // Avoid an extra prototype jump for these methods.
 
       _assign(pureComponentPrototype, Component.prototype);
 
-      pureComponentPrototype.isPureReactComponent = true;
+      pureComponentPrototype.isPureReactComponent = true; // an immutable object with a single mutable value
 
-      function AsyncComponent(props, context, updater) {
-        // Duplicated from Component.
-        this.props = props;
-        this.context = context;
-        this.refs = emptyObject; // We initialize the default updater but the real one gets injected by the
-        // renderer.
-
-        this.updater = updater || ReactNoopUpdateQueue;
+      function createRef() {
+        var refObject = {
+          current: null
+        };
+        {
+          Object.seal(refObject);
+        }
+        return refObject;
       }
 
-      var asyncComponentPrototype = AsyncComponent.prototype = new ComponentDummy();
-      asyncComponentPrototype.constructor = AsyncComponent; // Avoid an extra prototype jump for these methods.
-
-      _assign(asyncComponentPrototype, Component.prototype);
-
-      asyncComponentPrototype.unstable_isAsyncReactComponent = true;
-
-      asyncComponentPrototype.render = function () {
-        return this.props.children;
-      };
-      /**
-       * Keeps track of the current owner.
-       *
-       * The current owner is the component who should own any components that are
-       * currently being constructed.
-       */
-
-
-      var ReactCurrentOwner = {
-        /**
-         * @internal
-         * @type {ReactComponent}
-         */
-        current: null
-      };
       var hasOwnProperty = Object.prototype.hasOwnProperty;
       var RESERVED_PROPS = {
         key: true,
@@ -1284,8 +1081,10 @@ var react_development = createCommonjsModule(function (module) {
         __self: true,
         __source: true
       };
-      var specialPropKeyWarningShown;
-      var specialPropRefWarningShown;
+      var specialPropKeyWarningShown, specialPropRefWarningShown, didWarnAboutStringRefs;
+      {
+        didWarnAboutStringRefs = {};
+      }
 
       function hasValidRef(config) {
         {
@@ -1315,9 +1114,11 @@ var react_development = createCommonjsModule(function (module) {
 
       function defineKeyPropWarningGetter(props, displayName) {
         var warnAboutAccessingKey = function warnAboutAccessingKey() {
-          if (!specialPropKeyWarningShown) {
-            specialPropKeyWarningShown = true;
-            warning(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+          {
+            if (!specialPropKeyWarningShown) {
+              specialPropKeyWarningShown = true;
+              error('%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+            }
           }
         };
 
@@ -1330,9 +1131,11 @@ var react_development = createCommonjsModule(function (module) {
 
       function defineRefPropWarningGetter(props, displayName) {
         var warnAboutAccessingRef = function warnAboutAccessingRef() {
-          if (!specialPropRefWarningShown) {
-            specialPropRefWarningShown = true;
-            warning(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+          {
+            if (!specialPropRefWarningShown) {
+              specialPropRefWarningShown = true;
+              error('%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
+            }
           }
         };
 
@@ -1342,15 +1145,30 @@ var react_development = createCommonjsModule(function (module) {
           configurable: true
         });
       }
+
+      function warnIfStringRefCannotBeAutoConverted(config) {
+        {
+          if (typeof config.ref === 'string' && ReactCurrentOwner.current && config.__self && ReactCurrentOwner.current.stateNode !== config.__self) {
+            var componentName = getComponentName(ReactCurrentOwner.current.type);
+
+            if (!didWarnAboutStringRefs[componentName]) {
+              error('Component "%s" contains the string ref "%s". ' + 'Support for string refs will be removed in a future major release. ' + 'This case cannot be automatically converted to an arrow function. ' + 'We ask you to manually fix this case by using useRef() or createRef() instead. ' + 'Learn more about using refs safely here: ' + 'https://fb.me/react-strict-mode-string-ref', getComponentName(ReactCurrentOwner.current.type), config.ref);
+              didWarnAboutStringRefs[componentName] = true;
+            }
+          }
+        }
+      }
       /**
        * Factory method to create a new React element. This no longer adheres to
-       * the class pattern, so do not use new to call it. Also, no instanceof check
-       * will work. Instead test $$typeof field against Symbol.for('react.element') to check
+       * the class pattern, so do not use new to call it. Also, instanceof check
+       * will not work. Instead test $$typeof field against Symbol.for('react.element') to check
        * if something is a React Element.
        *
        * @param {*} type
+       * @param {*} props
        * @param {*} key
        * @param {string|object} ref
+       * @param {*} owner
        * @param {*} self A *temporary* helper to detect places where `this` is
        * different from the `owner` when React.createElement is called, so that we
        * can warn. We want to get rid of owner and replace string `ref`s with arrow
@@ -1358,15 +1176,13 @@ var react_development = createCommonjsModule(function (module) {
        * change in behavior.
        * @param {*} source An annotation object (added by a transpiler or otherwise)
        * indicating filename, line number, and/or other information.
-       * @param {*} owner
-       * @param {*} props
        * @internal
        */
 
 
       var ReactElement = function ReactElement(type, key, ref, self, source, owner, props) {
         var element = {
-          // This tag allow us to uniquely identify this as a React Element
+          // This tag allows us to uniquely identify this as a React Element
           $$typeof: REACT_ELEMENT_TYPE,
           // Built-in properties that belong on the element
           type: type,
@@ -1433,6 +1249,9 @@ var react_development = createCommonjsModule(function (module) {
         if (config != null) {
           if (hasValidRef(config)) {
             ref = config.ref;
+            {
+              warnIfStringRefCannotBeAutoConverted(config);
+            }
           }
 
           if (hasValidKey(config)) {
@@ -1483,26 +1302,19 @@ var react_development = createCommonjsModule(function (module) {
 
         {
           if (key || ref) {
-            if (typeof props.$$typeof === 'undefined' || props.$$typeof !== REACT_ELEMENT_TYPE) {
-              var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
+            var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
 
-              if (key) {
-                defineKeyPropWarningGetter(props, displayName);
-              }
+            if (key) {
+              defineKeyPropWarningGetter(props, displayName);
+            }
 
-              if (ref) {
-                defineRefPropWarningGetter(props, displayName);
-              }
+            if (ref) {
+              defineRefPropWarningGetter(props, displayName);
             }
           }
         }
         return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
       }
-      /**
-       * Return a function that produces ReactElements of a given type.
-       * See https://reactjs.org/docs/react-api.html#createfactory
-       */
-
 
       function cloneAndReplaceKey(oldElement, newKey) {
         var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
@@ -1515,6 +1327,12 @@ var react_development = createCommonjsModule(function (module) {
 
 
       function cloneElement(element, config, children) {
+        if (!!(element === null || element === undefined)) {
+          {
+            throw Error("React.cloneElement(...): The argument must be a React element, but you passed " + element + ".");
+          }
+        }
+
         var propName; // Original props are copied
 
         var props = _assign({}, element.props); // Reserved names are extracted
@@ -1583,7 +1401,7 @@ var react_development = createCommonjsModule(function (module) {
        * Verifies the object is a ReactElement.
        * See https://reactjs.org/docs/react-api.html#isvalidelement
        * @param {?object} object
-       * @return {boolean} True if `object` is a valid component.
+       * @return {boolean} True if `object` is a ReactElement.
        * @final
        */
 
@@ -1592,21 +1410,6 @@ var react_development = createCommonjsModule(function (module) {
         return _typeof$1(object) === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
       }
 
-      var ReactDebugCurrentFrame = {};
-      {
-        // Component that is being worked on
-        ReactDebugCurrentFrame.getCurrentStack = null;
-
-        ReactDebugCurrentFrame.getStackAddendum = function () {
-          var impl = ReactDebugCurrentFrame.getCurrentStack;
-
-          if (impl) {
-            return impl();
-          }
-
-          return null;
-        };
-      }
       var SEPARATOR = '.';
       var SUBSEPARATOR = ':';
       /**
@@ -1706,8 +1509,6 @@ var react_development = createCommonjsModule(function (module) {
             case 'object':
               switch (children.$$typeof) {
                 case REACT_ELEMENT_TYPE:
-                case REACT_CALL_TYPE:
-                case REACT_RETURN_TYPE:
                 case REACT_PORTAL_TYPE:
                   invokeCallback = true;
               }
@@ -1741,7 +1542,10 @@ var react_development = createCommonjsModule(function (module) {
             {
               // Warn about using Maps as children
               if (iteratorFn === children.entries) {
-                warning(didWarnAboutMaps, 'Using Maps as children is unsupported and will likely yield ' + 'unexpected results. Convert it to a sequence/iterable of keyed ' + 'ReactElements instead.%s', ReactDebugCurrentFrame.getStackAddendum());
+                if (!didWarnAboutMaps) {
+                  warn('Using Maps as children is deprecated and will be removed in ' + 'a future major release. Consider converting children to ' + 'an array of keyed ReactElements instead.');
+                }
+
                 didWarnAboutMaps = true;
               }
             }
@@ -1760,7 +1564,11 @@ var react_development = createCommonjsModule(function (module) {
               addendum = ' If you meant to render a collection of children, use an array ' + 'instead.' + ReactDebugCurrentFrame.getStackAddendum();
             }
             var childrenString = '' + children;
-            invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum);
+            {
+              {
+                throw Error("Objects are not valid as a React child (found: " + (childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString) + ")." + addendum);
+              }
+            }
           }
         }
 
@@ -1820,7 +1628,7 @@ var react_development = createCommonjsModule(function (module) {
       /**
        * Iterates through children that are typically specified as `props.children`.
        *
-       * See https://reactjs.org/docs/react-api.html#react.children.foreach
+       * See https://reactjs.org/docs/react-api.html#reactchildrenforeach
        *
        * The provided forEachFunc(child, index) will be called for each
        * leaf child.
@@ -1849,7 +1657,9 @@ var react_development = createCommonjsModule(function (module) {
         var mappedChild = func.call(context, child, bookKeeping.count++);
 
         if (Array.isArray(mappedChild)) {
-          mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, emptyFunction.thatReturnsArgument);
+          mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, function (c) {
+            return c;
+          });
         } else if (mappedChild != null) {
           if (isValidElement(mappedChild)) {
             mappedChild = cloneAndReplaceKey(mappedChild, // Keep both the (mapped) and old keys if they differ, just as
@@ -1875,7 +1685,7 @@ var react_development = createCommonjsModule(function (module) {
       /**
        * Maps children that are typically specified as `props.children`.
        *
-       * See https://reactjs.org/docs/react-api.html#react.children.map
+       * See https://reactjs.org/docs/react-api.html#reactchildrenmap
        *
        * The provided mapFunction(child, key, index) will be called for each
        * leaf child.
@@ -1900,34 +1710,38 @@ var react_development = createCommonjsModule(function (module) {
        * Count the number of children that are typically specified as
        * `props.children`.
        *
-       * See https://reactjs.org/docs/react-api.html#react.children.count
+       * See https://reactjs.org/docs/react-api.html#reactchildrencount
        *
        * @param {?*} children Children tree container.
        * @return {number} The number of children.
        */
 
 
-      function countChildren(children, context) {
-        return traverseAllChildren(children, emptyFunction.thatReturnsNull, null);
+      function countChildren(children) {
+        return traverseAllChildren(children, function () {
+          return null;
+        }, null);
       }
       /**
        * Flatten a children object (typically specified as `props.children`) and
        * return an array with appropriately re-keyed children.
        *
-       * See https://reactjs.org/docs/react-api.html#react.children.toarray
+       * See https://reactjs.org/docs/react-api.html#reactchildrentoarray
        */
 
 
       function toArray(children) {
         var result = [];
-        mapIntoWithKeyPrefixInternal(children, result, null, emptyFunction.thatReturnsArgument);
+        mapIntoWithKeyPrefixInternal(children, result, null, function (child) {
+          return child;
+        });
         return result;
       }
       /**
        * Returns the first child in a collection of children and verifies that there
        * is only one child in the collection.
        *
-       * See https://reactjs.org/docs/react-api.html#react.children.only
+       * See https://reactjs.org/docs/react-api.html#reactchildrenonly
        *
        * The current implementation of this function assumes that a single child gets
        * passed without a wrapper, but the purpose of this helper function is to
@@ -1940,72 +1754,295 @@ var react_development = createCommonjsModule(function (module) {
 
 
       function onlyChild(children) {
-        !isValidElement(children) ? invariant(false, 'React.Children.only expected to receive a single React element child.') : void 0;
+        if (!isValidElement(children)) {
+          {
+            throw Error("React.Children.only expected to receive a single React element child.");
+          }
+        }
+
         return children;
       }
 
-      var describeComponentFrame = function describeComponentFrame(name, source, ownerName) {
-        return '\n    in ' + (name || 'Unknown') + (source ? ' (at ' + source.fileName.replace(/^.*[\\\/]/, '') + ':' + source.lineNumber + ')' : ownerName ? ' (created by ' + ownerName + ')' : '');
-      };
-
-      function getComponentName(fiber) {
-        var type = fiber.type;
-
-        if (typeof type === 'string') {
-          return type;
+      function createContext(defaultValue, calculateChangedBits) {
+        if (calculateChangedBits === undefined) {
+          calculateChangedBits = null;
+        } else {
+          {
+            if (calculateChangedBits !== null && typeof calculateChangedBits !== 'function') {
+              error('createContext: Expected the optional second argument to be a ' + 'function. Instead received: %s', calculateChangedBits);
+            }
+          }
         }
 
-        if (typeof type === 'function') {
-          return type.displayName || type.name;
-        }
+        var context = {
+          $$typeof: REACT_CONTEXT_TYPE,
+          _calculateChangedBits: calculateChangedBits,
+          // As a workaround to support multiple concurrent renderers, we categorize
+          // some renderers as primary and others as secondary. We only expect
+          // there to be two concurrent renderers at most: React Native (primary) and
+          // Fabric (secondary); React DOM (primary) and React ART (secondary).
+          // Secondary renderers store their context values on separate fields.
+          _currentValue: defaultValue,
+          _currentValue2: defaultValue,
+          // Used to track how many concurrent renderers this context currently
+          // supports within in a single renderer. Such as parallel server rendering.
+          _threadCount: 0,
+          // These are circular
+          Provider: null,
+          Consumer: null
+        };
+        context.Provider = {
+          $$typeof: REACT_PROVIDER_TYPE,
+          _context: context
+        };
+        var hasWarnedAboutUsingNestedContextConsumers = false;
+        var hasWarnedAboutUsingConsumerProvider = false;
+        {
+          // A separate object, but proxies back to the original context object for
+          // backwards compatibility. It has a different $$typeof, so we can properly
+          // warn for the incorrect usage of Context as a Consumer.
+          var Consumer = {
+            $$typeof: REACT_CONTEXT_TYPE,
+            _context: context,
+            _calculateChangedBits: context._calculateChangedBits
+          }; // $FlowFixMe: Flow complains about not setting a value, which is intentional here
 
-        return null;
+          Object.defineProperties(Consumer, {
+            Provider: {
+              get: function get() {
+                if (!hasWarnedAboutUsingConsumerProvider) {
+                  hasWarnedAboutUsingConsumerProvider = true;
+                  error('Rendering <Context.Consumer.Provider> is not supported and will be removed in ' + 'a future major release. Did you mean to render <Context.Provider> instead?');
+                }
+
+                return context.Provider;
+              },
+              set: function set(_Provider) {
+                context.Provider = _Provider;
+              }
+            },
+            _currentValue: {
+              get: function get() {
+                return context._currentValue;
+              },
+              set: function set(_currentValue) {
+                context._currentValue = _currentValue;
+              }
+            },
+            _currentValue2: {
+              get: function get() {
+                return context._currentValue2;
+              },
+              set: function set(_currentValue2) {
+                context._currentValue2 = _currentValue2;
+              }
+            },
+            _threadCount: {
+              get: function get() {
+                return context._threadCount;
+              },
+              set: function set(_threadCount) {
+                context._threadCount = _threadCount;
+              }
+            },
+            Consumer: {
+              get: function get() {
+                if (!hasWarnedAboutUsingNestedContextConsumers) {
+                  hasWarnedAboutUsingNestedContextConsumers = true;
+                  error('Rendering <Context.Consumer.Consumer> is not supported and will be removed in ' + 'a future major release. Did you mean to render <Context.Consumer> instead?');
+                }
+
+                return context.Consumer;
+              }
+            }
+          }); // $FlowFixMe: Flow complains about missing properties because it doesn't understand defineProperty
+
+          context.Consumer = Consumer;
+        }
+        {
+          context._currentRenderer = null;
+          context._currentRenderer2 = null;
+        }
+        return context;
       }
-      /**
-       * ReactElementValidator provides a wrapper around a element factory
-       * which validates the props passed to the element. This is intended to be
-       * used only in DEV and could be replaced by a static type checker for languages
-       * that support it.
-       */
 
+      function lazy(ctor) {
+        var lazyType = {
+          $$typeof: REACT_LAZY_TYPE,
+          _ctor: ctor,
+          // React uses these fields to store the result.
+          _status: -1,
+          _result: null
+        };
+        {
+          // In production, this would just set it on the object.
+          var defaultProps;
+          var propTypes;
+          Object.defineProperties(lazyType, {
+            defaultProps: {
+              configurable: true,
+              get: function get() {
+                return defaultProps;
+              },
+              set: function set(newDefaultProps) {
+                error('React.lazy(...): It is not supported to assign `defaultProps` to ' + 'a lazy component import. Either specify them where the component ' + 'is defined, or create a wrapping component around it.');
+                defaultProps = newDefaultProps; // Match production behavior more closely:
 
-      {
-        var currentlyValidatingElement = null;
-        var propTypesMisspellWarningShown = false;
+                Object.defineProperty(lazyType, 'defaultProps', {
+                  enumerable: true
+                });
+              }
+            },
+            propTypes: {
+              configurable: true,
+              get: function get() {
+                return propTypes;
+              },
+              set: function set(newPropTypes) {
+                error('React.lazy(...): It is not supported to assign `propTypes` to ' + 'a lazy component import. Either specify them where the component ' + 'is defined, or create a wrapping component around it.');
+                propTypes = newPropTypes; // Match production behavior more closely:
 
-        var getDisplayName = function getDisplayName(element) {
-          if (element == null) {
-            return '#empty';
-          } else if (typeof element === 'string' || typeof element === 'number') {
-            return '#text';
-          } else if (typeof element.type === 'string') {
-            return element.type;
-          } else if (element.type === REACT_FRAGMENT_TYPE) {
-            return 'React.Fragment';
+                Object.defineProperty(lazyType, 'propTypes', {
+                  enumerable: true
+                });
+              }
+            }
+          });
+        }
+        return lazyType;
+      }
+
+      function forwardRef(render) {
+        {
+          if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
+            error('forwardRef requires a render function but received a `memo` ' + 'component. Instead of forwardRef(memo(...)), use ' + 'memo(forwardRef(...)).');
+          } else if (typeof render !== 'function') {
+            error('forwardRef requires a render function but was given %s.', render === null ? 'null' : _typeof$1(render));
           } else {
-            return element.type.displayName || element.type.name || 'Unknown';
-          }
-        };
-
-        var getStackAddendum = function getStackAddendum() {
-          var stack = '';
-
-          if (currentlyValidatingElement) {
-            var name = getDisplayName(currentlyValidatingElement);
-            var owner = currentlyValidatingElement._owner;
-            stack += describeComponentFrame(name, currentlyValidatingElement._source, owner && getComponentName(owner));
+            if (render.length !== 0 && render.length !== 2) {
+              error('forwardRef render functions accept exactly two parameters: props and ref. %s', render.length === 1 ? 'Did you forget to use the ref parameter?' : 'Any additional parameter will be undefined.');
+            }
           }
 
-          stack += ReactDebugCurrentFrame.getStackAddendum() || '';
-          return stack;
+          if (render != null) {
+            if (render.defaultProps != null || render.propTypes != null) {
+              error('forwardRef render functions do not support propTypes or defaultProps. ' + 'Did you accidentally pass a React component?');
+            }
+          }
+        }
+        return {
+          $$typeof: REACT_FORWARD_REF_TYPE,
+          render: render
         };
+      }
 
-        var VALID_FRAGMENT_PROPS = new Map([['children', true], ['key', true]]);
+      function isValidElementType(type) {
+        return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+        type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || _typeof$1(type) === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+      }
+
+      function memo(type, compare) {
+        {
+          if (!isValidElementType(type)) {
+            error('memo: The first argument must be a component. Instead ' + 'received: %s', type === null ? 'null' : _typeof$1(type));
+          }
+        }
+        return {
+          $$typeof: REACT_MEMO_TYPE,
+          type: type,
+          compare: compare === undefined ? null : compare
+        };
+      }
+
+      function resolveDispatcher() {
+        var dispatcher = ReactCurrentDispatcher.current;
+
+        if (!(dispatcher !== null)) {
+          {
+            throw Error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.");
+          }
+        }
+
+        return dispatcher;
+      }
+
+      function useContext(Context, unstable_observedBits) {
+        var dispatcher = resolveDispatcher();
+        {
+          if (unstable_observedBits !== undefined) {
+            error('useContext() second argument is reserved for future ' + 'use in React. Passing it is not supported. ' + 'You passed: %s.%s', unstable_observedBits, typeof unstable_observedBits === 'number' && Array.isArray(arguments[2]) ? '\n\nDid you call array.map(useContext)? ' + 'Calling Hooks inside a loop is not supported. ' + 'Learn more at https://fb.me/rules-of-hooks' : '');
+          } // TODO: add a more generic warning for invalid values.
+
+
+          if (Context._context !== undefined) {
+            var realContext = Context._context; // Don't deduplicate because this legitimately causes bugs
+            // and nobody should be using this in existing code.
+
+            if (realContext.Consumer === Context) {
+              error('Calling useContext(Context.Consumer) is not supported, may cause bugs, and will be ' + 'removed in a future major release. Did you mean to call useContext(Context) instead?');
+            } else if (realContext.Provider === Context) {
+              error('Calling useContext(Context.Provider) is not supported. ' + 'Did you mean to call useContext(Context) instead?');
+            }
+          }
+        }
+        return dispatcher.useContext(Context, unstable_observedBits);
+      }
+
+      function useState(initialState) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useState(initialState);
+      }
+
+      function useReducer(reducer, initialArg, init) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useReducer(reducer, initialArg, init);
+      }
+
+      function useRef(initialValue) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useRef(initialValue);
+      }
+
+      function useEffect(create, deps) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useEffect(create, deps);
+      }
+
+      function useLayoutEffect(create, deps) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useLayoutEffect(create, deps);
+      }
+
+      function useCallback(callback, deps) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useCallback(callback, deps);
+      }
+
+      function useMemo(create, deps) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useMemo(create, deps);
+      }
+
+      function useImperativeHandle(ref, create, deps) {
+        var dispatcher = resolveDispatcher();
+        return dispatcher.useImperativeHandle(ref, create, deps);
+      }
+
+      function useDebugValue(value, formatterFn) {
+        {
+          var dispatcher = resolveDispatcher();
+          return dispatcher.useDebugValue(value, formatterFn);
+        }
+      }
+
+      var propTypesMisspellWarningShown;
+      {
+        propTypesMisspellWarningShown = false;
       }
 
       function getDeclarationErrorAddendum() {
         if (ReactCurrentOwner.current) {
-          var name = getComponentName(ReactCurrentOwner.current);
+          var name = getComponentName(ReactCurrentOwner.current.type);
 
           if (name) {
             return '\n\nCheck the render method of `' + name + '`.';
@@ -2015,12 +2052,19 @@ var react_development = createCommonjsModule(function (module) {
         return '';
       }
 
-      function getSourceInfoErrorAddendum(elementProps) {
-        if (elementProps !== null && elementProps !== undefined && elementProps.__source !== undefined) {
-          var source = elementProps.__source;
+      function getSourceInfoErrorAddendum(source) {
+        if (source !== undefined) {
           var fileName = source.fileName.replace(/^.*[\\\/]/, '');
           var lineNumber = source.lineNumber;
           return '\n\nCheck your code at ' + fileName + ':' + lineNumber + '.';
+        }
+
+        return '';
+      }
+
+      function getSourceInfoErrorAddendumForProps(elementProps) {
+        if (elementProps !== null && elementProps !== undefined) {
+          return getSourceInfoErrorAddendum(elementProps.__source);
         }
 
         return '';
@@ -2041,7 +2085,7 @@ var react_development = createCommonjsModule(function (module) {
           var parentName = typeof parentType === 'string' ? parentType : parentType.displayName || parentType.name;
 
           if (parentName) {
-            info = '\n\nCheck the top-level render call using <' + parentName + '>.';
+            info = "\n\nCheck the top-level render call using <" + parentName + ">.";
           }
         }
 
@@ -2080,14 +2124,14 @@ var react_development = createCommonjsModule(function (module) {
 
         if (element && element._owner && element._owner !== ReactCurrentOwner.current) {
           // Give the component that originally created this child.
-          childOwner = ' It was passed a child from ' + getComponentName(element._owner) + '.';
+          childOwner = " It was passed a child from " + getComponentName(element._owner.type) + ".";
         }
 
-        currentlyValidatingElement = element;
+        setCurrentlyValidatingElement(element);
         {
-          warning(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.%s', currentComponentErrorInfo, childOwner, getStackAddendum());
+          error('Each child in a list should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.', currentComponentErrorInfo, childOwner);
         }
-        currentlyValidatingElement = null;
+        setCurrentlyValidatingElement(null);
       }
       /**
        * Ensure that every element either is passed in a static location, in an
@@ -2146,26 +2190,38 @@ var react_development = createCommonjsModule(function (module) {
 
 
       function validatePropTypes(element) {
-        var componentClass = element.type;
+        {
+          var type = element.type;
 
-        if (typeof componentClass !== 'function') {
-          return;
-        }
+          if (type === null || type === undefined || typeof type === 'string') {
+            return;
+          }
 
-        var name = componentClass.displayName || componentClass.name;
-        var propTypes = componentClass.propTypes;
+          var name = getComponentName(type);
+          var propTypes;
 
-        if (propTypes) {
-          currentlyValidatingElement = element;
-          checkPropTypes(propTypes, element.props, 'prop', name, getStackAddendum);
-          currentlyValidatingElement = null;
-        } else if (componentClass.PropTypes !== undefined && !propTypesMisspellWarningShown) {
-          propTypesMisspellWarningShown = true;
-          warning(false, 'Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', name || 'Unknown');
-        }
+          if (typeof type === 'function') {
+            propTypes = type.propTypes;
+          } else if (_typeof$1(type) === 'object' && (type.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
+          // Inner props are checked in the reconciler.
+          type.$$typeof === REACT_MEMO_TYPE)) {
+            propTypes = type.propTypes;
+          } else {
+            return;
+          }
 
-        if (typeof componentClass.getDefaultProps === 'function') {
-          warning(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
+          if (propTypes) {
+            setCurrentlyValidatingElement(element);
+            checkPropTypes(propTypes, element.props, 'prop', name, ReactDebugCurrentFrame.getStackAddendum);
+            setCurrentlyValidatingElement(null);
+          } else if (type.PropTypes !== undefined && !propTypesMisspellWarningShown) {
+            propTypesMisspellWarningShown = true;
+            error('Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', name || 'Unknown');
+          }
+
+          if (typeof type.getDefaultProps === 'function' && !type.getDefaultProps.isReactClassApproved) {
+            error('getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.');
+          }
         }
       }
       /**
@@ -2175,44 +2231,29 @@ var react_development = createCommonjsModule(function (module) {
 
 
       function validateFragmentProps(fragment) {
-        currentlyValidatingElement = fragment;
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+        {
+          setCurrentlyValidatingElement(fragment);
+          var keys = Object.keys(fragment.props);
 
-        try {
-          for (var _iterator = Object.keys(fragment.props)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var key = _step.value;
+          for (var i = 0; i < keys.length; i++) {
+            var key = keys[i];
 
-            if (!VALID_FRAGMENT_PROPS.has(key)) {
-              warning(false, 'Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.%s', key, getStackAddendum());
+            if (key !== 'children' && key !== 'key') {
+              error('Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.', key);
               break;
             }
           }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator['return']) {
-              _iterator['return']();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
+
+          if (fragment.ref !== null) {
+            error('Invalid attribute `ref` supplied to `React.Fragment`.');
           }
-        }
 
-        if (fragment.ref !== null) {
-          warning(false, 'Invalid attribute `ref` supplied to `React.Fragment`.%s', getStackAddendum());
+          setCurrentlyValidatingElement(null);
         }
-
-        currentlyValidatingElement = null;
       }
 
       function createElementWithValidation(type, props, children) {
-        var validType = typeof type === 'string' || typeof type === 'function' || _typeof$1(type) === 'symbol' || typeof type === 'number'; // We warn in this case but don't throw. We expect the element creation to
+        var validType = isValidElementType(type); // We warn in this case but don't throw. We expect the element creation to
         // succeed and there will likely be errors in render.
 
         if (!validType) {
@@ -2222,7 +2263,7 @@ var react_development = createCommonjsModule(function (module) {
             info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and named imports.";
           }
 
-          var sourceInfo = getSourceInfoErrorAddendum(props);
+          var sourceInfo = getSourceInfoErrorAddendumForProps(props);
 
           if (sourceInfo) {
             info += sourceInfo;
@@ -2230,8 +2271,22 @@ var react_development = createCommonjsModule(function (module) {
             info += getDeclarationErrorAddendum();
           }
 
-          info += getStackAddendum() || '';
-          warning(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : _typeof$1(type), info);
+          var typeString;
+
+          if (type === null) {
+            typeString = 'null';
+          } else if (Array.isArray(type)) {
+            typeString = 'array';
+          } else if (type !== undefined && type.$$typeof === REACT_ELEMENT_TYPE) {
+            typeString = "<" + (getComponentName(type.type) || 'Unknown') + " />";
+            info = ' Did you accidentally export a JSX literal instead of a component?';
+          } else {
+            typeString = _typeof$1(type);
+          }
+
+          {
+            error('React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', typeString, info);
+          }
         }
 
         var element = createElement.apply(this, arguments); // The result can be nullish if a mock or a custom function is used.
@@ -2252,7 +2307,7 @@ var react_development = createCommonjsModule(function (module) {
           }
         }
 
-        if (_typeof$1(type) === 'symbol' && type === REACT_FRAGMENT_TYPE) {
+        if (type === REACT_FRAGMENT_TYPE) {
           validateFragmentProps(element);
         } else {
           validatePropTypes(element);
@@ -2261,15 +2316,22 @@ var react_development = createCommonjsModule(function (module) {
         return element;
       }
 
-      function createFactoryWithValidation(type) {
-        var validatedFactory = createElementWithValidation.bind(null, type); // Legacy hook TODO: Warn if this is accessed
+      var didWarnAboutDeprecatedCreateFactory = false;
 
+      function createFactoryWithValidation(type) {
+        var validatedFactory = createElementWithValidation.bind(null, type);
         validatedFactory.type = type;
         {
+          if (!didWarnAboutDeprecatedCreateFactory) {
+            didWarnAboutDeprecatedCreateFactory = true;
+            warn('React.createFactory() is deprecated and will be removed in ' + 'a future major release. Consider using JSX ' + 'or use React.createElement() directly instead.');
+          } // Legacy hook: remove it
+
+
           Object.defineProperty(validatedFactory, 'type', {
             enumerable: false,
             get: function get() {
-              lowPriorityWarning$1(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.');
+              warn('Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.');
               Object.defineProperty(this, 'type', {
                 value: type
               });
@@ -2291,46 +2353,56 @@ var react_development = createCommonjsModule(function (module) {
         return newElement;
       }
 
-      var React = {
-        Children: {
-          map: mapChildren,
-          forEach: forEachChildren,
-          count: countChildren,
-          toArray: toArray,
-          only: onlyChild
-        },
-        Component: Component,
-        PureComponent: PureComponent,
-        unstable_AsyncComponent: AsyncComponent,
-        Fragment: REACT_FRAGMENT_TYPE,
-        createElement: createElementWithValidation,
-        cloneElement: cloneElementWithValidation,
-        createFactory: createFactoryWithValidation,
-        isValidElement: isValidElement,
-        version: ReactVersion,
-        __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: {
-          ReactCurrentOwner: ReactCurrentOwner,
-          // Used by renderers to avoid bundling object-assign twice in UMD bundles:
-          assign: _assign
-        }
-      };
       {
-        _assign(React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED, {
-          // These should not be included in production.
-          ReactDebugCurrentFrame: ReactDebugCurrentFrame,
-          // Shim for React DOM 16.0.0 which still destructured (but not used) this.
-          // TODO: remove in React 17.0.
-          ReactComponentTreeHook: {}
-        });
-      }
-      var React$2 = Object.freeze({
-        default: React
-      });
-      var React$3 = React$2 && React || React$2; // TODO: decide on the top-level export form.
-      // This is hacky but makes it work with both Rollup and Jest.
+        try {
+          var frozenObject = Object.freeze({});
+          var testMap = new Map([[frozenObject, null]]);
+          var testSet = new Set([frozenObject]); // This is necessary for Rollup to not consider these unused.
+          // https://github.com/rollup/rollup/issues/1771
+          // TODO: we can remove these if Rollup fixes the bug.
 
-      var react = React$3['default'] ? React$3['default'] : React$3;
-      module.exports = react;
+          testMap.set(0, 0);
+          testSet.add(0);
+        } catch (e) {}
+      }
+      var createElement$1 = createElementWithValidation;
+      var cloneElement$1 = cloneElementWithValidation;
+      var createFactory = createFactoryWithValidation;
+      var Children = {
+        map: mapChildren,
+        forEach: forEachChildren,
+        count: countChildren,
+        toArray: toArray,
+        only: onlyChild
+      };
+      exports.Children = Children;
+      exports.Component = Component;
+      exports.Fragment = REACT_FRAGMENT_TYPE;
+      exports.Profiler = REACT_PROFILER_TYPE;
+      exports.PureComponent = PureComponent;
+      exports.StrictMode = REACT_STRICT_MODE_TYPE;
+      exports.Suspense = REACT_SUSPENSE_TYPE;
+      exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
+      exports.cloneElement = cloneElement$1;
+      exports.createContext = createContext;
+      exports.createElement = createElement$1;
+      exports.createFactory = createFactory;
+      exports.createRef = createRef;
+      exports.forwardRef = forwardRef;
+      exports.isValidElement = isValidElement;
+      exports.lazy = lazy;
+      exports.memo = memo;
+      exports.useCallback = useCallback;
+      exports.useContext = useContext;
+      exports.useDebugValue = useDebugValue;
+      exports.useEffect = useEffect;
+      exports.useImperativeHandle = useImperativeHandle;
+      exports.useLayoutEffect = useLayoutEffect;
+      exports.useMemo = useMemo;
+      exports.useReducer = useReducer;
+      exports.useRef = useRef;
+      exports.useState = useState;
+      exports.version = ReactVersion;
     })();
   }
 });
@@ -5334,148 +5406,10 @@ var intlRelativeformat = createCommonjsModule(function (module, exports) {
   exports['default'] = exports;
 });
 
-createCommonjsModule(function (module, exports) {
-
-  Object.defineProperty(exports, "__esModule", {
-    value: !0
-  });
-  var b = "function" === typeof Symbol && Symbol.for,
-      c = b ? Symbol.for("react.element") : 60103,
-      d = b ? Symbol.for("react.portal") : 60106,
-      e = b ? Symbol.for("react.fragment") : 60107,
-      f = b ? Symbol.for("react.strict_mode") : 60108,
-      g = b ? Symbol.for("react.profiler") : 60114,
-      h = b ? Symbol.for("react.provider") : 60109,
-      k = b ? Symbol.for("react.context") : 60110,
-      l = b ? Symbol.for("react.async_mode") : 60111,
-      m = b ? Symbol.for("react.concurrent_mode") : 60111,
-      n = b ? Symbol.for("react.forward_ref") : 60112,
-      p = b ? Symbol.for("react.suspense") : 60113,
-      q = b ? Symbol.for("react.suspense_list") : 60120,
-      r = b ? Symbol.for("react.memo") : 60115,
-      t = b ? Symbol.for("react.lazy") : 60116,
-      v = b ? Symbol.for("react.fundamental") : 60117,
-      w = b ? Symbol.for("react.responder") : 60118,
-      x = b ? Symbol.for("react.scope") : 60119;
-
-  function y(a) {
-    if ("object" === _typeof$1(a) && null !== a) {
-      var u = a.$$typeof;
-
-      switch (u) {
-        case c:
-          switch (a = a.type, a) {
-            case l:
-            case m:
-            case e:
-            case g:
-            case f:
-            case p:
-              return a;
-
-            default:
-              switch (a = a && a.$$typeof, a) {
-                case k:
-                case n:
-                case h:
-                  return a;
-
-                default:
-                  return u;
-              }
-
-          }
-
-        case t:
-        case r:
-        case d:
-          return u;
-      }
-    }
-  }
-
-  function z(a) {
-    return y(a) === m;
-  }
-
-  exports.typeOf = y;
-  exports.AsyncMode = l;
-  exports.ConcurrentMode = m;
-  exports.ContextConsumer = k;
-  exports.ContextProvider = h;
-  exports.Element = c;
-  exports.ForwardRef = n;
-  exports.Fragment = e;
-  exports.Lazy = t;
-  exports.Memo = r;
-  exports.Portal = d;
-  exports.Profiler = g;
-  exports.StrictMode = f;
-  exports.Suspense = p;
-
-  exports.isValidElementType = function (a) {
-    return "string" === typeof a || "function" === typeof a || a === e || a === m || a === g || a === f || a === p || a === q || "object" === _typeof$1(a) && null !== a && (a.$$typeof === t || a.$$typeof === r || a.$$typeof === h || a.$$typeof === k || a.$$typeof === n || a.$$typeof === v || a.$$typeof === w || a.$$typeof === x);
-  };
-
-  exports.isAsyncMode = function (a) {
-    return z(a) || y(a) === l;
-  };
-
-  exports.isConcurrentMode = z;
-
-  exports.isContextConsumer = function (a) {
-    return y(a) === k;
-  };
-
-  exports.isContextProvider = function (a) {
-    return y(a) === h;
-  };
-
-  exports.isElement = function (a) {
-    return "object" === _typeof$1(a) && null !== a && a.$$typeof === c;
-  };
-
-  exports.isForwardRef = function (a) {
-    return y(a) === n;
-  };
-
-  exports.isFragment = function (a) {
-    return y(a) === e;
-  };
-
-  exports.isLazy = function (a) {
-    return y(a) === t;
-  };
-
-  exports.isMemo = function (a) {
-    return y(a) === r;
-  };
-
-  exports.isPortal = function (a) {
-    return y(a) === d;
-  };
-
-  exports.isProfiler = function (a) {
-    return y(a) === g;
-  };
-
-  exports.isStrictMode = function (a) {
-    return y(a) === f;
-  };
-
-  exports.isSuspense = function (a) {
-    return y(a) === p;
-  };
-});
-
 var reactIs_development = createCommonjsModule(function (module, exports) {
 
   {
     (function () {
-
-      Object.defineProperty(exports, '__esModule', {
-        value: true
-      }); // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
       // nor polyfill, then a plain number is used for performance.
 
       var hasSymbol = typeof Symbol === 'function' && Symbol.for;
@@ -5495,69 +5429,15 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
       var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
       var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
       var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+      var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
       var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
       var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
       var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
 
       function isValidElementType(type) {
         return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-        type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || _typeof$1(type) === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE);
+        type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || _typeof$1(type) === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
       }
-      /**
-       * Forked from fbjs/warning:
-       * https://github.com/facebook/fbjs/blob/e66ba20ad5be433eb54423f2b097d829324d9de6/packages/fbjs/src/__forks__/warning.js
-       *
-       * Only change is we use console.warn instead of console.error,
-       * and do nothing when 'console' is not supported.
-       * This really simplifies the code.
-       * ---
-       * Similar to invariant but only logs a warning if the condition is not met.
-       * This can be used to log issues in development environments in critical
-       * paths. Removing the logging code for production environments will keep the
-       * same logic and follow the same code paths.
-       */
-
-
-      var lowPriorityWarningWithoutStack = function lowPriorityWarningWithoutStack() {};
-
-      {
-        var printWarning = function printWarning(format) {
-          for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-
-          var argIndex = 0;
-          var message = 'Warning: ' + format.replace(/%s/g, function () {
-            return args[argIndex++];
-          });
-
-          if (typeof console !== 'undefined') {
-            console.warn(message);
-          }
-
-          try {
-            // --- Welcome to debugging React ---
-            // This error was thrown as a convenience so that you can use this stack
-            // to find the callsite that caused this warning to fire.
-            throw new Error(message);
-          } catch (x) {}
-        };
-
-        lowPriorityWarningWithoutStack = function lowPriorityWarningWithoutStack(condition, format) {
-          if (format === undefined) {
-            throw new Error('`lowPriorityWarningWithoutStack(condition, format, ...args)` requires a warning ' + 'message argument');
-          }
-
-          if (!condition) {
-            for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-              args[_key2 - 2] = arguments[_key2];
-            }
-
-            printWarning.apply(void 0, [format].concat(args));
-          }
-        };
-      }
-      var lowPriorityWarningWithoutStack$1 = lowPriorityWarningWithoutStack;
 
       function typeOf(object) {
         if (_typeof$1(object) === 'object' && object !== null) {
@@ -5582,6 +5462,8 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
                   switch ($$typeofType) {
                     case REACT_CONTEXT_TYPE:
                     case REACT_FORWARD_REF_TYPE:
+                    case REACT_LAZY_TYPE:
+                    case REACT_MEMO_TYPE:
                     case REACT_PROVIDER_TYPE:
                       return $$typeofType;
 
@@ -5591,8 +5473,6 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
 
               }
 
-            case REACT_LAZY_TYPE:
-            case REACT_MEMO_TYPE:
             case REACT_PORTAL_TYPE:
               return $$typeof;
           }
@@ -5620,8 +5500,9 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
       function isAsyncMode(object) {
         {
           if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-            hasWarnedAboutDeprecatedIsAsyncMode = true;
-            lowPriorityWarningWithoutStack$1(false, 'The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+            hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+            console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
           }
         }
         return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
@@ -5675,7 +5556,6 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
         return typeOf(object) === REACT_SUSPENSE_TYPE;
       }
 
-      exports.typeOf = typeOf;
       exports.AsyncMode = AsyncMode;
       exports.ConcurrentMode = ConcurrentMode;
       exports.ContextConsumer = ContextConsumer;
@@ -5689,7 +5569,6 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
       exports.Profiler = Profiler;
       exports.StrictMode = StrictMode;
       exports.Suspense = Suspense;
-      exports.isValidElementType = isValidElementType;
       exports.isAsyncMode = isAsyncMode;
       exports.isConcurrentMode = isConcurrentMode;
       exports.isContextConsumer = isContextConsumer;
@@ -5703,6 +5582,8 @@ var reactIs_development = createCommonjsModule(function (module, exports) {
       exports.isProfiler = isProfiler;
       exports.isStrictMode = isStrictMode;
       exports.isSuspense = isSuspense;
+      exports.isValidElementType = isValidElementType;
+      exports.typeOf = typeOf;
     })();
   }
 });
@@ -5713,8 +5594,6 @@ var reactIs = createCommonjsModule(function (module) {
     module.exports = reactIs_development;
   }
 });
-
-var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
 var printWarning = function printWarning() {};
 
@@ -5819,6 +5698,7 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
 
   var ReactPropTypes = {
     array: createPrimitiveTypeChecker('array'),
+    bigint: createPrimitiveTypeChecker('bigint'),
     bool: createPrimitiveTypeChecker('boolean'),
     func: createPrimitiveTypeChecker('function'),
     number: createPrimitiveTypeChecker('number'),
@@ -5866,8 +5746,9 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
    */
 
 
-  function PropTypeError(message) {
+  function PropTypeError(message, data) {
     this.message = message;
+    this.data = data && _typeof$1(data) === 'object' ? data : {};
     this.stack = '';
   } // Make `instanceof Error` still work for returned errors.
 
@@ -5933,7 +5814,9 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
         // check, but we can offer a more precise error message here rather than
         // 'of type `object`'.
         var preciseType = getPreciseType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'), {
+          expectedType: expectedType
+        });
       }
 
       return null;
@@ -6068,7 +5951,7 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
       }
 
       for (var key in propValue) {
-        if (has(propValue, key)) {
+        if (has$1(propValue, key)) {
           var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
 
           if (error instanceof Error) {
@@ -6099,15 +5982,23 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
     }
 
     function validate(props, propName, componentName, location, propFullName) {
+      var expectedTypes = [];
+
       for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
         var checker = arrayOfTypeCheckers[i];
+        var checkerResult = checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1);
 
-        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1) == null) {
+        if (checkerResult == null) {
           return null;
+        }
+
+        if (checkerResult.data && has$1(checkerResult.data, 'expectedType')) {
+          expectedTypes.push(checkerResult.data.expectedType);
         }
       }
 
-      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+      var expectedTypesMessage = expectedTypes.length > 0 ? ', expected one of type [' + expectedTypes.join(', ') + ']' : '';
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`' + expectedTypesMessage + '.'));
     }
 
     return createChainableTypeChecker(validate);
@@ -6125,6 +6016,10 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
     return createChainableTypeChecker(validate);
   }
 
+  function invalidValidatorError(componentName, location, propFullName, key, type) {
+    return new PropTypeError((componentName || 'React class') + ': ' + location + ' type `' + propFullName + '.' + key + '` is invalid; ' + 'it must be a function, usually from the `prop-types` package, but received `' + type + '`.');
+  }
+
   function createShapeTypeChecker(shapeTypes) {
     function validate(props, propName, componentName, location, propFullName) {
       var propValue = props[propName];
@@ -6137,8 +6032,8 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
       for (var key in shapeTypes) {
         var checker = shapeTypes[key];
 
-        if (!checker) {
-          continue;
+        if (typeof checker !== 'function') {
+          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
         }
 
         var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
@@ -6161,14 +6056,17 @@ var factoryWithTypeCheckers = function factoryWithTypeCheckers(isValidElement, t
 
       if (propType !== 'object') {
         return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      } // We need to check all keys in case some are required but missing from
-      // props.
+      } // We need to check all keys in case some are required but missing from props.
 
 
       var allKeys = objectAssign({}, props[propName], shapeTypes);
 
       for (var key in allKeys) {
         var checker = shapeTypes[key];
+
+        if (has$1(shapeTypes, key) && typeof checker !== 'function') {
+          return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+        }
 
         if (!checker) {
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' + '\nBad object: ' + JSON.stringify(props[propName], null, '  ') + '\nValid keys: ' + JSON.stringify(Object.keys(shapeTypes), null, '  '));
@@ -6365,8 +6263,17 @@ var FORWARD_REF_STATICS = {
   displayName: true,
   propTypes: true
 };
+var MEMO_STATICS = {
+  '$$typeof': true,
+  compare: true,
+  defaultProps: true,
+  displayName: true,
+  propTypes: true,
+  type: true
+};
 var TYPE_STATICS = {};
 TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
 
 /**
  * Use invariant() to assert state which your program assumes to be true.
@@ -8109,16 +8016,16 @@ addLocaleData(defaultLocaleData);
 
 addLocaleData(allLocaleData);
 
-var img$1 = "data:image/png;base64,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";
+var img$1 = "data:image/png;base64,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";
 
-var img = "data:image/svg+xml,%3c%3fxml version='1.0' encoding='UTF-8' standalone='no'%3f%3e%3c!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3e%3csvg width='100%25' height='100%25' viewBox='0 0 53 53' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xml:space='preserve' xmlns:serif='http://www.serif.com/' style='fill-rule:evenodd%3bclip-rule:evenodd%3bstroke-linejoin:round%3bstroke-miterlimit:2%3b'%3e%3crect id='%e3%82%a2%e3%83%bc%e3%83%88%e3%83%9c%e3%83%bc%e3%83%891' x='0' y='-0' width='52.083' height='52.056' style='fill:none%3b'/%3e%3cclipPath id='_clip1'%3e%3crect x='0' y='-0' width='52.083' height='52.056'/%3e%3c/clipPath%3e%3cg clip-path='url(%23_clip1)'%3e%3cg%3e%3cg%3e%3cpath d='M17.605%2c14.113c1.125%2c0.983 1.582%2c2.148 2.563%2c3.17c2.407%2c2.507 4.811%2c5.102 7.423%2c7.551c4.352%2c4.079 10.045%2c7.577 14.675%2c11.435' style='fill:none%3bstroke:white%3bstroke-width:19.17px%3bstroke-linecap:round%3bstroke-miterlimit:1.5%3b'/%3e%3cpath d='M40.824%2c11.292c-0.914%2c2.03 -3.668%2c3.898 -5.723%2c5.559c-2.684%2c2.171 -5.276%2c4.398 -7.941%2c6.581c-7.278%2c5.958 -12.955%2c12.359 -18.301%2c19.04' style='fill:none%3bstroke:white%3bstroke-width:19.17px%3bstroke-linecap:round%3bstroke-miterlimit:1.5%3b'/%3e%3c/g%3e%3cg%3e%3cpath d='M17.605%2c14.113c1.125%2c0.983 1.582%2c2.148 2.563%2c3.17c2.407%2c2.507 4.811%2c5.102 7.423%2c7.551c4.352%2c4.079 10.045%2c7.577 14.675%2c11.435' style='fill:none%3bstroke:%23f9a83a%3bstroke-width:12.5px%3bstroke-linecap:round%3bstroke-miterlimit:1.5%3b'/%3e%3cpath d='M40.824%2c11.292c-0.914%2c2.03 -3.668%2c3.898 -5.723%2c5.559c-2.684%2c2.171 -5.276%2c4.398 -7.941%2c6.581c-7.278%2c5.958 -12.955%2c12.359 -18.301%2c19.04' style='fill:none%3bstroke:%23f9a83a%3bstroke-width:12.5px%3bstroke-linecap:round%3bstroke-miterlimit:1.5%3b'/%3e%3c/g%3e%3cg%3e%3cpath d='M16.783%2c15.055c0.264%2c0.231 0.482%2c0.475 0.679%2c0.725c0.621%2c0.785 1.078%2c1.612 1.804%2c2.368c1.456%2c1.517 2.91%2c3.065 4.41%2c4.594c0.996%2c1.015 2.012%2c2.021 3.06%2c3.004c1.353%2c1.268 2.831%2c2.481 4.368%2c3.666c3.429%2c2.643 7.152%2c5.143 10.362%2c7.817c0.53%2c0.442 1.319%2c0.37 1.76%2c-0.16c0.442%2c-0.53 0.37%2c-1.319 -0.16%2c-1.76c-3.233%2c-2.694 -6.982%2c-5.215 -10.435%2c-7.877c-1.472%2c-1.135 -2.89%2c-2.296 -4.185%2c-3.51c-1.023%2c-0.959 -2.014%2c-1.941 -2.985%2c-2.931c-1.494%2c-1.522 -2.942%2c-3.064 -4.392%2c-4.574c-0.667%2c-0.695 -1.075%2c-1.465 -1.645%2c-2.187c-0.288%2c-0.365 -0.61%2c-0.72 -0.997%2c-1.058c-0.52%2c-0.454 -1.31%2c-0.4 -1.764%2c0.119c-0.453%2c0.52 -0.4%2c1.31 0.12%2c1.764Z' style='fill:white%3b'/%3e%3cpath d='M39.685%2c10.779c-0.331%2c0.733 -0.963%2c1.428 -1.694%2c2.108c-1.138%2c1.059 -2.52%2c2.058 -3.676%2c2.992l-7.947%2c6.585c-3.596%2c2.944 -6.805%2c5.995 -9.778%2c9.133c-3.104%2c3.276 -5.949%2c6.648 -8.707%2c10.094c-0.431%2c0.539 -0.343%2c1.326 0.195%2c1.757c0.539%2c0.431 1.326%2c0.344 1.757%2c-0.195c2.715%2c-3.392 5.515%2c-6.712 8.57%2c-9.937c2.903%2c-3.064 6.036%2c-6.043 9.547%2c-8.917l7.935%2c-6.576c1.418%2c-1.146 3.155%2c-2.393 4.43%2c-3.716c0.716%2c-0.743 1.293%2c-1.516 1.647%2c-2.301c0.283%2c-0.629 0.003%2c-1.37 -0.626%2c-1.653c-0.629%2c-0.284 -1.37%2c-0.003 -1.653%2c0.626Z' style='fill:white%3b'/%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e";
+var img = "data:image/svg+xml,%3c%3fxml version='1.0' encoding='UTF-8' standalone='no'%3f%3e%3c!-- Created with Inkscape (http://www.inkscape.org/) --%3e%3csvg version='1.1' id='svg1' width='53' height='53' viewBox='0 0 53 53' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3e %3cdefs id='defs1'%3e %3cclipPath clipPathUnits='userSpaceOnUse' id='clipPath6-8'%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect7-2' width='20' height='20' x='25.023653' y='33.364868' ry='2.2485611' rx='0' /%3e %3c/clipPath%3e %3c/defs%3e %3cg id='g31-5' transform='matrix(0.75928406%2c0%2c0%2c0.75928406%2c17.236863%2c25.818622)'%3e %3cg id='g32-2' transform='translate(-0.80389749%2c-30.950053)'%3e %3cg id='g12-2' transform='translate(-22.01%2c-22.01)'%3e %3cg id='g9-7'%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect4-1' width='20' height='20' x='25.023653' y='33.364868' ry='2.2485611' rx='0' /%3e %3cpath style='display:inline%3bfill:%23bfbfbf%3bfill-opacity:0.997368%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round' d='m 28.166965%2c49.503015 -3.143312%2c3.861853 H 45.02365 l -3.111029%2c-3.857131 z' id='path6-5' clip-path='url(%23clipPath6-8)' /%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.00749625%3bstroke-linecap:round%3bstroke-linejoin:round' id='rect5-2' width='14.992504' height='14.992504' x='27.546455' y='34.887669' ry='1.6855781' rx='0' /%3e %3c/g%3e %3cg id='g8-1' transform='translate(-17.608946%2c0.7191563)'%3e %3crect style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.00881563%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect8-1' width='2.4618986' height='6.076623' x='51.420704' y='39.126453' ry='0.55856603' /%3e %3cpath style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' d='m 49.847767%2c40.164063 h 5.478132 a 0.36114875%2c0.36114875 114.46509 0 0 0.272273%2c-0.598416 l -2.489863%2c-2.85722 a 0.69169628%2c0.69169628 179.99999 0 0 -1.042953%2c0 l -2.489863%2c2.85722 a 0.36114889%2c0.36114889 65.534905 0 0 0.272274%2c0.598416 z' id='path8-0' transform='translate(0.06481857%2c0.80884199)' /%3e %3c/g%3e %3c/g%3e %3cg id='g23-1' transform='translate(-44.02)'%3e %3cg id='g21-8'%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect20-7' width='20' height='20' x='25.023653' y='33.364868' ry='2.2485611' rx='0' /%3e %3cpath style='display:inline%3bfill:%23bfbfbf%3bfill-opacity:0.997368%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round' d='m 28.166965%2c49.503015 -3.143312%2c3.861853 H 45.02365 l -3.111029%2c-3.857131 z' id='path20-6' clip-path='url(%23clipPath6-8)' /%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.00749625%3bstroke-linecap:round%3bstroke-linejoin:round' id='rect21-0' width='14.992504' height='14.992504' x='27.546455' y='34.887669' ry='1.6855781' rx='0' /%3e %3c/g%3e %3cg id='g22-0' transform='rotate(-90%2c44.206757%2c50.40559)'%3e %3crect style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.00881563%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect22-9' width='2.4618986' height='6.076623' x='51.420704' y='39.126453' ry='0.55856603' /%3e %3cpath style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' d='m 49.847767%2c40.164063 h 5.478132 a 0.36114875%2c0.36114875 114.46509 0 0 0.272273%2c-0.598416 l -2.489863%2c-2.85722 a 0.69169628%2c0.69169628 179.99999 0 0 -1.042953%2c0 l -2.489863%2c2.85722 a 0.36114889%2c0.36114889 65.534905 0 0 0.272274%2c0.598416 z' id='path22-5' transform='translate(0.06481857%2c0.80884199)' /%3e %3c/g%3e %3c/g%3e %3cg id='g27-6' transform='translate(-22.01)'%3e %3cg id='g25-8-2'%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect24-8' width='20' height='20' x='25.023653' y='33.364868' ry='2.2485611' rx='0' /%3e %3cpath style='display:inline%3bfill:%23bfbfbf%3bfill-opacity:0.997368%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round' d='m 28.166965%2c49.503015 -3.143312%2c3.861853 H 45.02365 l -3.111029%2c-3.857131 z' id='path24-5' clip-path='url(%23clipPath6-8)' /%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.00749625%3bstroke-linecap:round%3bstroke-linejoin:round' id='rect25-9' width='14.992504' height='14.992504' x='27.546455' y='34.887669' ry='1.6855781' rx='0' /%3e %3c/g%3e %3cg id='g26-4' transform='rotate(180%2c43.847179%2c41.601117)'%3e %3crect style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.00881563%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect26-3' width='2.4618986' height='6.076623' x='51.420704' y='39.126453' ry='0.55856603' /%3e %3cpath style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' d='m 49.847767%2c40.164063 h 5.478132 a 0.36114875%2c0.36114875 114.46509 0 0 0.272273%2c-0.598416 l -2.489863%2c-2.85722 a 0.69169628%2c0.69169628 179.99999 0 0 -1.042953%2c0 l -2.489863%2c2.85722 a 0.36114889%2c0.36114889 65.534905 0 0 0.272274%2c0.598416 z' id='path26-9' transform='translate(0.06481857%2c0.80884199)' /%3e %3c/g%3e %3c/g%3e %3cg id='g29-0'%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect28-5' width='20' height='20' x='25.023653' y='33.364868' ry='2.2485611' rx='0' /%3e %3cpath style='display:inline%3bfill:%23bfbfbf%3bfill-opacity:0.997368%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round' d='m 28.166965%2c49.503015 -3.143312%2c3.861853 H 45.02365 l -3.111029%2c-3.857131 z' id='path28-6' clip-path='url(%23clipPath6-8)' /%3e %3crect style='fill:white%3bfill-opacity:1%3bstroke:black%3bstroke-width:0.00749625%3bstroke-linecap:round%3bstroke-linejoin:round' id='rect29-3' width='14.992504' height='14.992504' x='27.546455' y='34.887669' ry='1.6855781' rx='0' /%3e %3c/g%3e %3cg id='g30-6' transform='rotate(90%2c43.4876%2c32.796644)'%3e %3crect style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.00881563%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' id='rect30-3' width='2.4618986' height='6.076623' x='51.420704' y='39.126453' ry='0.55856603' /%3e %3cpath style='fill:black%3bfill-opacity:1%3bstroke:none%3bstroke-width:0.01%3bstroke-linecap:round%3bstroke-linejoin:round%3bstroke-opacity:1' d='m 49.847767%2c40.164063 h 5.478132 a 0.36114875%2c0.36114875 114.46509 0 0 0.272273%2c-0.598416 l -2.489863%2c-2.85722 a 0.69169628%2c0.69169628 179.99999 0 0 -1.042953%2c0 l -2.489863%2c2.85722 a 0.36114889%2c0.36114889 65.534905 0 0 0.272274%2c0.598416 z' id='path30-0' transform='translate(0.06481857%2c0.80884199)' /%3e %3c/g%3e %3c/g%3e %3c/g%3e%3c/svg%3e";
 
 var translationMap = {
   'ja': {
-    'gui.extension.keyEvents.description': 'キーボードイベントを拡張する'
+    'gui.extension.keyEvents.description': 'キーボードを押す'
   },
   'ja-Hira': {
-    'gui.extension.keyEvents.description': 'キーボードイベントをかくちょうする'
+    'gui.extension.keyEvents.description': 'キーボード を おす'
   }
 };
 var entry = {
@@ -8129,10 +8036,11 @@ var entry = {
   iconURL: img$1,
   insetIconURL: img,
   description: /*#__PURE__*/react.createElement(FormattedMessage, {
-    defaultMessage: "Extended keyboard events",
+    defaultMessage: "Press keyboard keys",
     description: "Description for keyEvents extension for Xcratch",
     id: "gui.extension.keyEvents.description"
   }),
+  tags: ['function', 'key', 'keyboard'],
   featured: true,
   disabled: false,
   bluetoothRequired: false,
@@ -8789,16 +8697,16 @@ var formatMessageParse = createCommonjsModule(function (module, exports) {
 });
 
 // @flow
-var LONG$1 = 'long';
-var SHORT$1 = 'short';
-var NARROW$1 = 'narrow';
-var NUMERIC$1 = 'numeric';
-var TWODIGIT$1 = '2-digit';
+var LONG = 'long';
+var SHORT = 'short';
+var NARROW = 'narrow';
+var NUMERIC = 'numeric';
+var TWODIGIT = '2-digit';
 /**
  * formatting information
  **/
 
-var formatMessageFormats$1 = {
+var formatMessageFormats = {
   number: {
     decimal: {
       style: 'decimal'
@@ -8820,58 +8728,58 @@ var formatMessageFormats$1 = {
   },
   date: {
     short: {
-      month: NUMERIC$1,
-      day: NUMERIC$1,
-      year: TWODIGIT$1
+      month: NUMERIC,
+      day: NUMERIC,
+      year: TWODIGIT
     },
     medium: {
-      month: SHORT$1,
-      day: NUMERIC$1,
-      year: NUMERIC$1
+      month: SHORT,
+      day: NUMERIC,
+      year: NUMERIC
     },
     long: {
-      month: LONG$1,
-      day: NUMERIC$1,
-      year: NUMERIC$1
+      month: LONG,
+      day: NUMERIC,
+      year: NUMERIC
     },
     full: {
-      month: LONG$1,
-      day: NUMERIC$1,
-      year: NUMERIC$1,
-      weekday: LONG$1
+      month: LONG,
+      day: NUMERIC,
+      year: NUMERIC,
+      weekday: LONG
     },
     default: {
-      month: SHORT$1,
-      day: NUMERIC$1,
-      year: NUMERIC$1
+      month: SHORT,
+      day: NUMERIC,
+      year: NUMERIC
     }
   },
   time: {
     short: {
-      hour: NUMERIC$1,
-      minute: NUMERIC$1
+      hour: NUMERIC,
+      minute: NUMERIC
     },
     medium: {
-      hour: NUMERIC$1,
-      minute: NUMERIC$1,
-      second: NUMERIC$1
+      hour: NUMERIC,
+      minute: NUMERIC,
+      second: NUMERIC
     },
     long: {
-      hour: NUMERIC$1,
-      minute: NUMERIC$1,
-      second: NUMERIC$1,
-      timeZoneName: SHORT$1
+      hour: NUMERIC,
+      minute: NUMERIC,
+      second: NUMERIC,
+      timeZoneName: SHORT
     },
     full: {
-      hour: NUMERIC$1,
-      minute: NUMERIC$1,
-      second: NUMERIC$1,
-      timeZoneName: SHORT$1
+      hour: NUMERIC,
+      minute: NUMERIC,
+      second: NUMERIC,
+      timeZoneName: SHORT
     },
     default: {
-      hour: NUMERIC$1,
-      minute: NUMERIC$1,
-      second: NUMERIC$1
+      hour: NUMERIC,
+      minute: NUMERIC,
+      second: NUMERIC
     }
   },
   duration: {
@@ -8958,57 +8866,57 @@ var formatMessageFormats$1 = {
 
       switch (current) {
         case 'G':
-          options.era = n === 5 ? NARROW$1 : n === 4 ? LONG$1 : SHORT$1;
+          options.era = n === 5 ? NARROW : n === 4 ? LONG : SHORT;
           break;
 
         case 'y':
         case 'Y':
-          options.year = n === 2 ? TWODIGIT$1 : NUMERIC$1;
+          options.year = n === 2 ? TWODIGIT : NUMERIC;
           break;
 
         case 'M':
         case 'L':
           n = Math.min(Math.max(n - 1, 0), 4);
-          options.month = [NUMERIC$1, TWODIGIT$1, SHORT$1, LONG$1, NARROW$1][n];
+          options.month = [NUMERIC, TWODIGIT, SHORT, LONG, NARROW][n];
           break;
 
         case 'E':
         case 'e':
         case 'c':
-          options.weekday = n === 5 ? NARROW$1 : n === 4 ? LONG$1 : SHORT$1;
+          options.weekday = n === 5 ? NARROW : n === 4 ? LONG : SHORT;
           break;
 
         case 'd':
         case 'D':
-          options.day = n === 2 ? TWODIGIT$1 : NUMERIC$1;
+          options.day = n === 2 ? TWODIGIT : NUMERIC;
           break;
 
         case 'h':
         case 'K':
           options.hour12 = true;
-          options.hour = n === 2 ? TWODIGIT$1 : NUMERIC$1;
+          options.hour = n === 2 ? TWODIGIT : NUMERIC;
           break;
 
         case 'H':
         case 'k':
           options.hour12 = false;
-          options.hour = n === 2 ? TWODIGIT$1 : NUMERIC$1;
+          options.hour = n === 2 ? TWODIGIT : NUMERIC;
           break;
 
         case 'm':
-          options.minute = n === 2 ? TWODIGIT$1 : NUMERIC$1;
+          options.minute = n === 2 ? TWODIGIT : NUMERIC;
           break;
 
         case 's':
         case 'S':
-          options.second = n === 2 ? TWODIGIT$1 : NUMERIC$1;
+          options.second = n === 2 ? TWODIGIT : NUMERIC;
           break;
 
         case 'z':
         case 'Z':
         case 'v':
         case 'V':
-          options.timeZoneName = n === 1 ? SHORT$1 : LONG$1;
+          options.timeZoneName = n === 1 ? SHORT : LONG;
           break;
       }
     }
@@ -9020,7 +8928,7 @@ var formatMessageFormats$1 = {
 // @flow
 // "lookup" algorithm http://tools.ietf.org/html/rfc4647#section-3.4
 // assumes normalized language tags, and matches in a case sensitive manner
-var lookupClosestLocale$1 = function lookupClosestLocale(locale
+var lookupClosestLocale = function lookupClosestLocale(locale
 /*: string | string[] | void */
 , available
 /*: { [string]: any } */
@@ -9365,6 +9273,13 @@ var f = [function (s
 /*: Rule */
 {
   var n = +s;
+  return n === 1 || n === 11 ? one : n === 2 || n === 12 ? two : n === 3 || n === 13 ? few : other;
+}, function (s
+/*: string | number */
+)
+/*: Rule */
+{
+  var n = +s;
   return n === 1 ? one : n === 2 || n === 3 ? two : n === 4 ? few : n === 6 ? many : other;
 }, function (s
 /*: string | number */
@@ -9598,7 +9513,8 @@ var plurals = {
     ordinal: f[0]
   },
   gd: {
-    cardinal: f[15]
+    cardinal: f[15],
+    ordinal: f[40]
   },
   gl: {
     cardinal: f[4]
@@ -9608,7 +9524,7 @@ var plurals = {
   },
   gu: {
     cardinal: f[2],
-    ordinal: f[40]
+    ordinal: f[41]
   },
   guw: {
     cardinal: f[1]
@@ -9627,7 +9543,7 @@ var plurals = {
   },
   hi: {
     cardinal: f[2],
-    ordinal: f[40]
+    ordinal: f[41]
   },
   hr: {
     cardinal: f[7]
@@ -9637,11 +9553,14 @@ var plurals = {
   },
   hu: {
     cardinal: f[0],
-    ordinal: f[41]
+    ordinal: f[42]
   },
   hy: {
     cardinal: f[12],
     ordinal: f[0]
+  },
+  ia: {
+    cardinal: f[4]
   },
   io: {
     cardinal: f[4]
@@ -9651,7 +9570,7 @@ var plurals = {
   },
   it: {
     cardinal: f[4],
-    ordinal: f[42]
+    ordinal: f[43]
   },
   iu: {
     cardinal: f[19]
@@ -9670,7 +9589,7 @@ var plurals = {
   },
   ka: {
     cardinal: f[0],
-    ordinal: f[43]
+    ordinal: f[44]
   },
   kab: {
     cardinal: f[12]
@@ -9683,7 +9602,7 @@ var plurals = {
   },
   kk: {
     cardinal: f[0],
-    ordinal: f[44]
+    ordinal: f[45]
   },
   kkj: {
     cardinal: f[0]
@@ -9741,7 +9660,7 @@ var plurals = {
   },
   mk: {
     cardinal: f[24],
-    ordinal: f[45]
+    ordinal: f[46]
   },
   ml: {
     cardinal: f[0]
@@ -9755,7 +9674,7 @@ var plurals = {
   },
   mr: {
     cardinal: f[2],
-    ordinal: f[46]
+    ordinal: f[47]
   },
   mt: {
     cardinal: f[26]
@@ -9774,7 +9693,7 @@ var plurals = {
   },
   ne: {
     cardinal: f[0],
-    ordinal: f[47]
+    ordinal: f[48]
   },
   nl: {
     cardinal: f[4]
@@ -9805,7 +9724,7 @@ var plurals = {
   },
   or: {
     cardinal: f[0],
-    ordinal: f[48]
+    ordinal: f[49]
   },
   os: {
     cardinal: f[0]
@@ -9850,9 +9769,13 @@ var plurals = {
   saq: {
     cardinal: f[0]
   },
+  sc: {
+    cardinal: f[4],
+    ordinal: f[43]
+  },
   scn: {
     cardinal: f[4],
-    ordinal: f[42]
+    ordinal: f[43]
   },
   sd: {
     cardinal: f[0]
@@ -9904,7 +9827,7 @@ var plurals = {
   },
   sq: {
     cardinal: f[0],
-    ordinal: f[49]
+    ordinal: f[50]
   },
   sr: {
     cardinal: f[7]
@@ -9920,7 +9843,7 @@ var plurals = {
   },
   sv: {
     cardinal: f[4],
-    ordinal: f[50]
+    ordinal: f[51]
   },
   sw: {
     cardinal: f[4]
@@ -9945,7 +9868,7 @@ var plurals = {
   },
   tk: {
     cardinal: f[0],
-    ordinal: f[51]
+    ordinal: f[52]
   },
   tl: {
     cardinal: f[13],
@@ -9968,7 +9891,7 @@ var plurals = {
   },
   uk: {
     cardinal: f[29],
-    ordinal: f[52]
+    ordinal: f[53]
   },
   ur: {
     cardinal: f[4]
@@ -10179,7 +10102,7 @@ var formatMessageInterpret = createCommonjsModule(function (module, exports) {
   /*: Locales */
   ) {
     var style = element[2];
-    var options = formatMessageFormats$1.number[style] || formatMessageFormats$1.parseNumberPattern(style) || formatMessageFormats$1.number.default;
+    var options = formatMessageFormats.number[style] || formatMessageFormats.parseNumberPattern(style) || formatMessageFormats.number.default;
     return new Intl.NumberFormat(locales, options).format;
   }
 
@@ -10189,7 +10112,7 @@ var formatMessageInterpret = createCommonjsModule(function (module, exports) {
   /*: Locales */
   ) {
     var style = element[2];
-    var options = formatMessageFormats$1.duration[style] || formatMessageFormats$1.duration.default;
+    var options = formatMessageFormats.duration[style] || formatMessageFormats.duration.default;
     var fs = new Intl.NumberFormat(locales, options.seconds).format;
     var fm = new Intl.NumberFormat(locales, options.minutes).format;
     var fh = new Intl.NumberFormat(locales, options.hours).format;
@@ -10212,7 +10135,7 @@ var formatMessageInterpret = createCommonjsModule(function (module, exports) {
   ) {
     var type = element[1];
     var style = element[2];
-    var options = formatMessageFormats$1[type][style] || formatMessageFormats$1.parseDatePattern(style) || formatMessageFormats$1[type].default;
+    var options = formatMessageFormats[type][style] || formatMessageFormats.parseDatePattern(style) || formatMessageFormats[type].default;
     return new Intl.DateTimeFormat(locales, options).format;
   }
 
@@ -10232,7 +10155,7 @@ var formatMessageInterpret = createCommonjsModule(function (module, exports) {
         type: pluralType
       });
     } else {
-      var locale = lookupClosestLocale$1(locales, plurals);
+      var locale = lookupClosestLocale(locales, plurals);
       var select = locale && plurals[locale][pluralType] || returnOther;
       pluralRules = {
         select: select
@@ -10280,259 +10203,6 @@ var formatMessageInterpret = createCommonjsModule(function (module, exports) {
   };
   exports.types = defaults;
 });
-
-// @flow
-// "lookup" algorithm http://tools.ietf.org/html/rfc4647#section-3.4
-// assumes normalized language tags, and matches in a case sensitive manner
-var lookupClosestLocale = function lookupClosestLocale(locale
-/*: string | string[] | void */
-, available
-/*: { [string]: any } */
-)
-/*: ?string */
-{
-  if (typeof locale === 'string' && available[locale]) return locale;
-  var locales = [].concat(locale || []);
-
-  for (var l = 0, ll = locales.length; l < ll; ++l) {
-    var current = locales[l].split('-');
-
-    while (current.length) {
-      var candidate = current.join('-');
-      if (available[candidate]) return candidate;
-      current.pop();
-    }
-  }
-};
-
-// @flow
-var LONG = 'long';
-var SHORT = 'short';
-var NARROW = 'narrow';
-var NUMERIC = 'numeric';
-var TWODIGIT = '2-digit';
-/**
- * formatting information
- **/
-
-var formatMessageFormats = {
-  number: {
-    decimal: {
-      style: 'decimal'
-    },
-    integer: {
-      style: 'decimal',
-      maximumFractionDigits: 0
-    },
-    currency: {
-      style: 'currency',
-      currency: 'USD'
-    },
-    percent: {
-      style: 'percent'
-    },
-    default: {
-      style: 'decimal'
-    }
-  },
-  date: {
-    short: {
-      month: NUMERIC,
-      day: NUMERIC,
-      year: TWODIGIT
-    },
-    medium: {
-      month: SHORT,
-      day: NUMERIC,
-      year: NUMERIC
-    },
-    long: {
-      month: LONG,
-      day: NUMERIC,
-      year: NUMERIC
-    },
-    full: {
-      month: LONG,
-      day: NUMERIC,
-      year: NUMERIC,
-      weekday: LONG
-    },
-    default: {
-      month: SHORT,
-      day: NUMERIC,
-      year: NUMERIC
-    }
-  },
-  time: {
-    short: {
-      hour: NUMERIC,
-      minute: NUMERIC
-    },
-    medium: {
-      hour: NUMERIC,
-      minute: NUMERIC,
-      second: NUMERIC
-    },
-    long: {
-      hour: NUMERIC,
-      minute: NUMERIC,
-      second: NUMERIC,
-      timeZoneName: SHORT
-    },
-    full: {
-      hour: NUMERIC,
-      minute: NUMERIC,
-      second: NUMERIC,
-      timeZoneName: SHORT
-    },
-    default: {
-      hour: NUMERIC,
-      minute: NUMERIC,
-      second: NUMERIC
-    }
-  },
-  duration: {
-    default: {
-      hours: {
-        minimumIntegerDigits: 1,
-        maximumFractionDigits: 0
-      },
-      minutes: {
-        minimumIntegerDigits: 2,
-        maximumFractionDigits: 0
-      },
-      seconds: {
-        minimumIntegerDigits: 2,
-        maximumFractionDigits: 3
-      }
-    }
-  },
-  parseNumberPattern: function parseNumberPattern(pattern
-  /*: ?string */
-  ) {
-    if (!pattern) return;
-    var options = {};
-    var currency = pattern.match(/\b[A-Z]{3}\b/i);
-    var syms = pattern.replace(/[^¤]/g, '').length;
-    if (!syms && currency) syms = 1;
-
-    if (syms) {
-      options.style = 'currency';
-      options.currencyDisplay = syms === 1 ? 'symbol' : syms === 2 ? 'code' : 'name';
-      options.currency = currency ? currency[0].toUpperCase() : 'USD';
-    } else if (pattern.indexOf('%') >= 0) {
-      options.style = 'percent';
-    }
-
-    if (!/[@#0]/.test(pattern)) return options.style ? options : undefined;
-    options.useGrouping = pattern.indexOf(',') >= 0;
-
-    if (/E\+?[@#0]+/i.test(pattern) || pattern.indexOf('@') >= 0) {
-      var size = pattern.replace(/E\+?[@#0]+|[^@#0]/gi, '');
-      options.minimumSignificantDigits = Math.min(Math.max(size.replace(/[^@0]/g, '').length, 1), 21);
-      options.maximumSignificantDigits = Math.min(Math.max(size.length, 1), 21);
-    } else {
-      var parts = pattern.replace(/[^#0.]/g, '').split('.');
-      var integer = parts[0];
-      var n = integer.length - 1;
-
-      while (integer[n] === '0') {
-        --n;
-      }
-
-      options.minimumIntegerDigits = Math.min(Math.max(integer.length - 1 - n, 1), 21);
-      var fraction = parts[1] || '';
-      n = 0;
-
-      while (fraction[n] === '0') {
-        ++n;
-      }
-
-      options.minimumFractionDigits = Math.min(Math.max(n, 0), 20);
-
-      while (fraction[n] === '#') {
-        ++n;
-      }
-
-      options.maximumFractionDigits = Math.min(Math.max(n, 0), 20);
-    }
-
-    return options;
-  },
-  parseDatePattern: function parseDatePattern(pattern
-  /*: ?string */
-  ) {
-    if (!pattern) return;
-    var options = {};
-
-    for (var i = 0; i < pattern.length;) {
-      var current = pattern[i];
-      var n = 1;
-
-      while (pattern[++i] === current) {
-        ++n;
-      }
-
-      switch (current) {
-        case 'G':
-          options.era = n === 5 ? NARROW : n === 4 ? LONG : SHORT;
-          break;
-
-        case 'y':
-        case 'Y':
-          options.year = n === 2 ? TWODIGIT : NUMERIC;
-          break;
-
-        case 'M':
-        case 'L':
-          n = Math.min(Math.max(n - 1, 0), 4);
-          options.month = [NUMERIC, TWODIGIT, SHORT, LONG, NARROW][n];
-          break;
-
-        case 'E':
-        case 'e':
-        case 'c':
-          options.weekday = n === 5 ? NARROW : n === 4 ? LONG : SHORT;
-          break;
-
-        case 'd':
-        case 'D':
-          options.day = n === 2 ? TWODIGIT : NUMERIC;
-          break;
-
-        case 'h':
-        case 'K':
-          options.hour12 = true;
-          options.hour = n === 2 ? TWODIGIT : NUMERIC;
-          break;
-
-        case 'H':
-        case 'k':
-          options.hour12 = false;
-          options.hour = n === 2 ? TWODIGIT : NUMERIC;
-          break;
-
-        case 'm':
-          options.minute = n === 2 ? TWODIGIT : NUMERIC;
-          break;
-
-        case 's':
-        case 'S':
-          options.second = n === 2 ? TWODIGIT : NUMERIC;
-          break;
-
-        case 'z':
-        case 'Z':
-        case 'v':
-        case 'V':
-          options.timeZoneName = n === 1 ? SHORT : LONG;
-          break;
-      }
-    }
-
-    return Object.keys(options).length ? options : undefined;
-  }
-};
 
 var formatMessage$1 = createCommonjsModule(function (module, exports) {
   /*::
@@ -10879,7 +10549,7 @@ var extensionURL = 'https://yokobond.github.io/xcx-key-events/dist/keyEvents.mjs
  */
 // eslint-disable-next-line max-len
 
-var blockIconURI = 'data:image/png;base64,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';
+var blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAA1CAYAAADh5qNwAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAABDxJREFUaIHtmMtLa1cUh78kanzcqlRzER/UFgTBBz5SnFgsBUvRmU7EgVSKM4WCIOhEaC06UQrFP8CxOHEgBbHYQieKCKIiQiQJErkxxtxEbNLjyergJtZoYl4ntpH8IJBzstdvry85e+21oxMRXpv0/3UCmVAOKluUg8oW5aCyRTmobFFeBjyLgMIkxvuBvzTNQES0fC2JiCrJSRWRn7XMQ6dh7/cR8B7QpfLdAh8DHi0S0XJNFZEaEKG4Yq0SeZFCoSgKy8vL+P3+l5hO0zX1NtqCCQaDMjIyIoAMDg6KqsZcctVa5ZJxqLm5OeHDmhFApqenMw6V8cevr6+PiYkJAMbGxhgYGMj0lJmHam9vp7GxEYCGhgbMZnOmp3ydHcWLQPX29rKwsEB/f/9LTKfp5vsWeJdGfA3g0CKRV/n4ad7QKoqC3W6nsDB+TxsIBKitraWgoEDTHLSE8osIR0dHeDyJt3Aej4e2tjb0er1mnbqWj5/Xbrf/ngwQgNfrxWaz/Qlca5WIloUCgNvb22pVVd8kOt5gMNwUFxdrUiDCegilA74EKpOIF2AXsIWu3wBfAcYkPALAb8BN6PoT4HOS6/hdwHYon4je74dYTVkc3YjIZyGP3RQ99kREJyKfhvxS0ZxE6f2+TuKbeagS4AugAki1B+rgwz7XHfJLRd+E3zyEMqRoBh+qaDrx4fnT8biPTaj6+Xy+NOaCjY0NzGYza2trafl4vd6Exj0LFQwGmZqaYnJyMq1krFYre3t7nJ2dpeUzOzvL+Pg4qqo+Oy7m5nt3d8fw8DCrq6vU1NTQ29sLQEtLC0tLS2kll4xmZmbY3d0F4PT0FLvdjt1uZ3V1FaMxRpGVf6tfROW6urqSqqqqiFMrIGazOVrl+U5inHwXFxelu7tbAOnq6pL5+flY1ataRL59fLOnp+dJDpWVleJwOB4P3Q+zxIQSETk/P5fm5mYZGhoSi8UiFotF3G53UlA7OztiNBoFEIPBIJubm0lBXV9f3889Ojoq9fX1cnJyEi0+Maiw6dbWVqxE4kKJiKyvr0teXp6srKw85xEV6qG2t7fl8vIy1seJQyWoZ6FERFwuVzyPuFBxdA/1YuepioqKl5rqKZRo3OBmWtHyjSjpqqqyv78PgE73fD+pKApVVVXU19dH3Pf5fBwcHCR0SPT7/TQ1NVFeXh5x32az4XA44h4eRQRVVeno6CA/Pz8qlPP4+Jibm5un0TFktVopKSnBZDK9A7yKovx9eHhYoCgKiqIk5HF8fExnZ6diNBo9gNPtdmO1WhERAoFAwh6tra3O8A9xD+V0On8COkpLS8tjBT+WXq8Put3uPZPJtAEELy4u5ouKir43xtwVo3oEnE7nL3V1dbfAry6X64+ysjJzMBhMeL3r9fr3LpfrR5PJBGTgkPh/0Kv8NykHlS3KQWWLclDZohxUtugfqhKr0EH5qJcAAAAASUVORK5CYII=';
 /**
  * Extended keyboard events for Xcratch.
  */
@@ -10948,7 +10618,7 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
             },
             HOLD_TIME: {
               type: argumentType.NUMBER,
-              defaultValue: '0'
+              defaultValue: '100'
             }
           }
         }],
@@ -11025,12 +10695,21 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
 
       return menu;
     }
+    /**
+     * Dispatch events of key down and repeat while the time then return after the key up.
+     * @param {object} args - the block's arguments.
+     * @param {string} args.KEY_VALUE - key value of the event to dispatch.
+     * @param {number} args.HOLD_TIME - duration time to hold the key.
+     * @return {Promise} - a Promise that resolves after the key up event.
+     */
+
   }, {
     key: "pressKeyWhile",
     value: function pressKeyWhile(args) {
       var _this = this;
 
       var keyValue = args.KEY_VALUE;
+      var holdTime = parseInt(args.HOLD_TIME, 10);
 
       if (this.keyProcesses[keyValue]) {
         this.stopKeyProcess(keyValue);
@@ -11044,21 +10723,29 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
       this.keyProcesses[keyValue] = keyProcess;
       var repeatDelayTime = 200;
       var repeatIntervalTime = 100;
-      keyProcess.repeatStarter = setTimeout(function () {
-        keyProcess.keyRepeater = setInterval(function () {
-          document.dispatchEvent(new KeyboardEvent('keydown', {
-            key: keyValue,
-            repeat: true
-          }));
-        }, repeatIntervalTime);
-      }, repeatDelayTime);
+
+      {
+        keyProcess.repeatStarter = setTimeout(function () {
+          keyProcess.keyRepeater = setInterval(function () {
+            document.dispatchEvent(new KeyboardEvent('keydown', {
+              key: keyValue,
+              repeat: true
+            }));
+          }, repeatIntervalTime);
+        }, repeatDelayTime);
+      }
+
       return new Promise(function (resolve) {
         var keyProcesses = _this.keyProcesses;
 
         keyProcess.keyEndUp = function () {
           if (!keyProcesses[keyValue]) return;
-          clearTimeout(keyProcess.repeatStarter);
-          if (keyProcess.keyRepeater) clearInterval(keyProcess.keyRepeater);
+
+          if (keyProcess.repeatStarter) {
+            clearTimeout(keyProcess.repeatStarter);
+            if (keyProcess.keyRepeater) clearInterval(keyProcess.keyRepeater);
+          }
+
           document.dispatchEvent(new KeyboardEvent('keyup', {
             key: keyValue
           }));
@@ -11069,7 +10756,7 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
 
         keyProcess.keyEndUpTimeout = setTimeout(function () {
           return keyProcess.keyEndUp();
-        }, args.HOLD_TIME);
+        }, holdTime);
       });
     }
   }, {
@@ -11145,10 +10832,20 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
 
 var extensionTranslations = {
   'ja': {
-    'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] ミリ秒間押す'
+    'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] ミリ秒間押す',
+    'keyEvents.keyValue.space': 'スペース',
+    'keyEvents.keyValue.arrowUp': '上向き矢印',
+    'keyEvents.keyValue.arrowDown': '下向き矢印',
+    'keyEvents.keyValue.arrowRight': '右向き矢印',
+    'keyEvents.keyValue.arrowLeft': '左向き矢印'
   },
   'ja-Hira': {
-    'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] みりびょうかんおす'
+    'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] みりびょうかんおす',
+    'keyEvents.keyValue.space': 'スペース',
+    'keyEvents.keyValue.arrowUp': 'うえむきやじるし',
+    'keyEvents.keyValue.arrowDown': 'したむきやじるし',
+    'keyEvents.keyValue.arrowRight': 'みぎむきやじるし',
+    'keyEvents.keyValue.arrowLeft': 'ひだりむきやじるし'
   }
 };
 var blockClass = KeyEventsBlocks; // loadable-extension needs this line.
