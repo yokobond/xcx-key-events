@@ -408,7 +408,8 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
     }
 
     /**
-     * Dispatch events of key down and repeat while the time then return after the key up.
+     * Dispatch a key down event, then a key up event after the hold time.
+     * No key repeat events are dispatched while holding.
      * @param {object} args - the block's arguments.
      * @param {string} args.KEY_VALUE - key value of the event to dispatch.
      * @param {number} args.HOLD_TIME - duration time to hold the key.
@@ -429,26 +430,10 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
       }));
       var keyProcess = {};
       this.keyProcesses[keyValue] = keyProcess;
-      var repeatDelayTime = 200;
-      var repeatIntervalTime = 100;
-      {
-        keyProcess.repeatStarter = setTimeout(function () {
-          keyProcess.keyRepeater = setInterval(function () {
-            document.dispatchEvent(new KeyboardEvent('keydown', {
-              key: keyValue,
-              repeat: true
-            }));
-          }, repeatIntervalTime);
-        }, repeatDelayTime);
-      }
       return new Promise(function (resolve) {
         var keyProcesses = _this.keyProcesses;
         keyProcess.keyEndUp = function () {
           if (!keyProcesses[keyValue]) return;
-          if (keyProcess.repeatStarter) {
-            clearTimeout(keyProcess.repeatStarter);
-            if (keyProcess.keyRepeater) clearInterval(keyProcess.keyRepeater);
-          }
           document.dispatchEvent(new KeyboardEvent('keyup', {
             key: keyValue
           }));
