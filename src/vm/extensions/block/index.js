@@ -1,14 +1,28 @@
-const BlockType = require('../../extension-support/block-type');
-const ArgumentType = require('../../extension-support/argument-type');
-// const cast = require('../../util/cast');
-// const log = require('../../util/log');
+import BlockType from '../../extension-support/block-type';
+import ArgumentType from '../../extension-support/argument-type';
+import translations from './translations.json';
 
 /**
- * Formatter which is used for translating.
- * When it was loaded as a module, 'formatMessage' will be replaced which is used in the runtime.
- * @type {Function}
+ * Formatter which is used for translation.
+ * This will be replaced which is used in the runtime.
+ * @param {object} messageData - format-message object
+ * @returns {string} - message for the locale
  */
-let formatMessage = require('format-message');
+let formatMessage = messageData => messageData.default;
+
+/**
+ * Setup format-message for this extension.
+ */
+const setupTranslations = () => {
+    if (!formatMessage.setup) return;
+    const localeSetup = formatMessage.setup();
+    if (localeSetup && localeSetup.translations[localeSetup.locale]) {
+        Object.assign(
+            localeSetup.translations[localeSetup.locale],
+            translations[localeSetup.locale]
+        );
+    }
+};
 
 const EXTENSION_ID = 'keyEvents';
 
@@ -30,6 +44,14 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAA1CAYA
  * Extended keyboard events for Xcratch.
  */
 class KeyEventsBlocks {
+    /**
+     * A translation object which is used in this class.
+     * @param {FormatObject} formatter - translation object
+     */
+    static set formatMessage (formatter) {
+        formatMessage = formatter;
+        if (formatMessage) setupTranslations();
+    }
 
     /**
      * @return {string} - the name of this extension.
@@ -92,7 +114,7 @@ class KeyEventsBlocks {
      * @returns {object} metadata for this extension and its blocks.
      */
     getInfo () {
-        this.setupTranslations();
+        setupTranslations();
         return {
             id: KeyEventsBlocks.EXTENSION_ID,
             name: KeyEventsBlocks.EXTENSION_NAME,
@@ -129,8 +151,7 @@ class KeyEventsBlocks {
                     items: this.KEY_VALUE_MENU
                 }
             },
-            // eslint-disable-next-line no-use-before-define
-            translationMap: extensionTranslations
+            translationMap: translations
         };
     }
 
@@ -252,40 +273,6 @@ class KeyEventsBlocks {
             this.stopKeyProcess(keyValue);
         });
     }
-
-    /**
-     * Setup format-message for this extension.
-     */
-    setupTranslations () {
-        const localeSetup = formatMessage.setup();
-        if (localeSetup && localeSetup.translations[localeSetup.locale]) {
-            Object.assign(
-                localeSetup.translations[localeSetup.locale],
-                // eslint-disable-next-line no-use-before-define
-                extensionTranslations[localeSetup.locale]
-            );
-        }
-    }
 }
 
-const extensionTranslations = {
-    'ja': {
-        'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] ミリ秒間押す',
-        'keyEvents.keyValue.space': 'スペース',
-        'keyEvents.keyValue.arrowUp': '上向き矢印',
-        'keyEvents.keyValue.arrowDown': '下向き矢印',
-        'keyEvents.keyValue.arrowRight': '右向き矢印',
-        'keyEvents.keyValue.arrowLeft': '左向き矢印'
-    },
-    'ja-Hira': {
-        'keyEvents.pressKeyWhile': '[KEY_VALUE] キーを [HOLD_TIME] みりびょうかんおす',
-        'keyEvents.keyValue.space': 'スペース',
-        'keyEvents.keyValue.arrowUp': 'うえむきやじるし',
-        'keyEvents.keyValue.arrowDown': 'したむきやじるし',
-        'keyEvents.keyValue.arrowRight': 'みぎむきやじるし',
-        'keyEvents.keyValue.arrowLeft': 'ひだりむきやじるし'
-    }
-};
-
-exports.blockClass = KeyEventsBlocks; // loadable-extension needs this line.
-module.exports = KeyEventsBlocks;
+export {KeyEventsBlocks as default, KeyEventsBlocks as blockClass};

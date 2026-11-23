@@ -4,13 +4,14 @@
 			"path": "."
 		},
 		{
-			"path": "../scratch-gui/node_modules/scratch-vm"
+			"path": "../scratch-editor"
 		}
 	],
 	"settings": {
 		"eslint.format.enable": true,
 		"eslint.workingDirectories": [
-		"./src"
+			"./src/vm",
+			"./src/gui"
 		]
 	}
 }
