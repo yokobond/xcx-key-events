@@ -15,6 +15,51 @@ Open [Xcratch](https://github.com/yokobond/xcratch/) and choose "Extension Loade
 https://yokobond.github.io/xcx-key-events/dist/keyEvents.mjs
 ```
 
+## Development
+
+This project is developed with [scratch-editor](https://github.com/xcratch/scratch-editor) placed next to this repository.
+
+```text
+workspace/
+|- scratch-editor/
+`- xcx-key-events/
+```
+
+### Install Dependencies
+
+```sh
+npm install
+```
+
+### Setup Development Environment
+
+Link `extension-support` and `util` of the local scratch-vm into `src/vm`.
+
+```sh
+npm run setup-dev
+# or specify the path of scratch-vm
+npm run setup-dev -- <path-to>/scratch-editor/packages/scratch-vm
+```
+
+### Bundle into a Module
+
+```sh
+npm run build   # build once
+npm run watch   # rebuild on changes
+```
+
+Output: `dist/keyEvents.mjs`
+
+### Test
+
+```sh
+npm test
+```
+
+### Debug
+
+Run the "debug extension on xcratch.github.io editor" launch configuration in VS Code. It serves this repository at `https://0.0.0.0:5500/` (needs `.vscode/localhost.pem` and `.vscode/localhost-key.pem` made by mkcert) and opens the editor with `?extension=https://0.0.0.0:5500/dist/keyEvents.mjs`.
+
 ## Author
 
 👤 **Koji Yokokawa**

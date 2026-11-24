@@ -4,3 +4,15 @@
 # NPM
 /node_modules
 npm-*
+
+# Links to scratch-vm (created by setup-dev)
+src/vm/*
+!src/vm/extensions/
+!src/vm/.*
+
+# Local Agent files
+.agents/
+.claude/
+
+# Certificates and keys
+*.pem
