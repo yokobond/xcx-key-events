@@ -4,18 +4,21 @@ var img = "data:image/svg+xml,%3c%3fxml version='1.0' encoding='UTF-8' standalon
 
 var en = {
 	"keyEvents.entry.name": "Key Events",
-	"keyEvents.entry.description": "Press keyboard keys"
+	"keyEvents.entry.description": "Press keyboard keys",
+	"keyEvents.entry.helpLink": "https://github.com/yokobond/xcx-key-events/blob/master/README.md"
 };
 var ja$1 = {
 	"keyEvents.entry.name": "Key Events",
-	"keyEvents.entry.description": "キーボードを押す"
+	"keyEvents.entry.description": "キーボードを押す",
+	"keyEvents.entry.helpLink": "https://github.com/yokobond/xcx-key-events/blob/master/README.ja.md"
 };
 var translations$1 = {
 	en: en,
 	ja: ja$1,
 	"ja-Hira": {
 	"keyEvents.entry.name": "Key Events",
-	"keyEvents.entry.description": "キーボード を おす"
+	"keyEvents.entry.description": "キーボード を おす",
+	"keyEvents.entry.helpLink": "https://github.com/yokobond/xcx-key-events/blob/master/README.ja.md"
 }
 };
 
@@ -61,7 +64,13 @@ var entry = {
   disabled: false,
   bluetoothRequired: false,
   internetConnectionRequired: false,
-  helpLink: 'https://github.com/yokobond/xcx-key-events/',
+  get helpLink() {
+    return formatMessage$1({
+      id: 'keyEvents.entry.helpLink',
+      defaultMessage: 'https://github.com/yokobond/xcx-key-events/blob/master/README.md',
+      description: 'help link for keyEvents extension'
+    });
+  },
   setFormatMessage: function setFormatMessage(formatter) {
     formatMessage$1 = formatter;
   },

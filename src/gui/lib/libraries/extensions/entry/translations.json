@@ -1,14 +1,17 @@
 {
   "en": {
     "keyEvents.entry.name": "Key Events",
-    "keyEvents.entry.description": "Press keyboard keys"
+    "keyEvents.entry.description": "Press keyboard keys",
+    "keyEvents.entry.helpLink": "https://github.com/yokobond/xcx-key-events/blob/master/README.md"
   },
   "ja": {
     "keyEvents.entry.name": "Key Events",
-    "keyEvents.entry.description": "キーボードを押す"
+    "keyEvents.entry.description": "キーボードを押す",
+    "keyEvents.entry.helpLink": "https://github.com/yokobond/xcx-key-events/blob/master/README.ja.md"
   },
   "ja-Hira": {
     "keyEvents.entry.name": "Key Events",
-    "keyEvents.entry.description": "キーボード を おす"
+    "keyEvents.entry.description": "キーボード を おす",
+    "keyEvents.entry.helpLink": "https://github.com/yokobond/xcx-key-events/blob/master/README.ja.md"
   }
 }
