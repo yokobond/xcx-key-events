@@ -1,0 +1,14 @@
+{
+  "en": {
+    "keyEvents.entry.name": "Key Events",
+    "keyEvents.entry.description": "Press keyboard keys"
+  },
+  "ja": {
+    "keyEvents.entry.name": "Key Events",
+    "keyEvents.entry.description": "キーボードを押す"
+  },
+  "ja-Hira": {
+    "keyEvents.entry.name": "Key Events",
+    "keyEvents.entry.description": "キーボード を おす"
+  }
+}
