@@ -1,3 +1,5 @@
+English | [日本語](README.ja.md)
+
 # xcx-key-events
 keyboard events extension for Xcratch ([yokobond/xcratch: Extendable Scratch3 Programming Environment](https://github.com/yokobond/xcratch/))
 
