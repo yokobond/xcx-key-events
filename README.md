@@ -14,6 +14,8 @@ It also has blocks to operate the mouse on the stage. They change the mouse stat
 - "press / release mouse button" presses or releases the mouse button at the current position.
 - "drag mouse from x: 0 y: 0 to x: 100 y: 0 in 500 ms" drags the mouse. A sprite which is set "draggable" is dragged with the mouse pointer. Moving the pointer while the button is pressed also drags it.
 
+In the example project, the "Draggable" sprite clicks "Sprite1" and then drags itself twice when the green flag is clicked.
+
 ## How to Add This Extension
 
 Open [Xcratch](https://github.com/yokobond/xcratch/) and choose "Extension Loader" in the extension list then input the URL as follows. 
