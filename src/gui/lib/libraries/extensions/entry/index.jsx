@@ -42,7 +42,13 @@ const entry = {
     disabled: false,
     bluetoothRequired: false,
     internetConnectionRequired: false,
-    helpLink: 'https://github.com/yokobond/xcx-key-events/',
+    get helpLink () {
+        return formatMessage({
+            id: 'keyEvents.entry.helpLink',
+            defaultMessage: 'https://github.com/yokobond/xcx-key-events/blob/master/README.md',
+            description: 'help link for keyEvents extension'
+        });
+    },
     setFormatMessage: formatter => {
         formatMessage = formatter;
     },
