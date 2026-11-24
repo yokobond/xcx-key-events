@@ -7,6 +7,13 @@ Open [Example Project](https://xcratch.github.io/editor/#https://yokobond.github
 
 This project using "Key Events" extension which add an extra-block "press key while 0 ms" to normal Scratch. This "press key while 0 ms" block dispatches a key-down event and then a single key-up event after the time, simulating holding the key without key repeat.
 
+It also has blocks to operate the mouse on the stage. They change the mouse state of the project, so "mouse x", "mouse down?", "touching mouse-pointer?" and "when this sprite clicked" react to them.
+
+- "move mouse pointer to x: 0 y: 0" moves the mouse pointer.
+- "press mouse at x: 0 y: 0 for 100 ms" presses the mouse button at the position and releases it after the time.
+- "press / release mouse button" presses or releases the mouse button at the current position.
+- "drag mouse from x: 0 y: 0 to x: 100 y: 0 in 500 ms" drags the mouse. A sprite which is set "draggable" is dragged with the mouse pointer. Moving the pointer while the button is pressed also drags it.
+
 ## How to Add This Extension
 
 Open [Xcratch](https://github.com/yokobond/xcratch/) and choose "Extension Loader" in the extension list then input the URL as follows. 

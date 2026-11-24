@@ -1,5 +1,6 @@
 import BlockType from '../../extension-support/block-type';
 import ArgumentType from '../../extension-support/argument-type';
+import Cast from '../../util/cast';
 import translations from './translations.json';
 
 /**
@@ -108,6 +109,26 @@ class KeyEventsBlocks {
          * All processing key event now.
          */
         this.keyProcesses = {};
+
+        /**
+         * Mouse state which is controlled by this extension.
+         * @type {object}
+         */
+        this.mouseState = {
+            isDown: false,
+            downX: 0,
+            downY: 0,
+            dragCandidate: null,
+            dragOffsetX: 0,
+            dragOffsetY: 0,
+            dragTarget: null
+        };
+
+        /**
+         * Running mouse process (click or drag) now.
+         * @type {?object}
+         */
+        this.mouseProcess = null;
     }
 
     /**
@@ -143,12 +164,110 @@ class KeyEventsBlocks {
                             defaultValue: '100'
                         }
                     }
+                },
+                '---',
+                {
+                    opcode: 'moveMouseTo',
+                    blockType: BlockType.COMMAND,
+                    text: formatMessage({
+                        id: 'keyEvents.moveMouseTo',
+                        default: 'move mouse pointer to x: [X] y: [Y]',
+                        description: 'move the mouse pointer to the position'
+                    }),
+                    func: 'moveMouseTo',
+                    arguments: {
+                        X: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '0'
+                        },
+                        Y: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '0'
+                        }
+                    }
+                },
+                {
+                    opcode: 'clickMouseAt',
+                    blockType: BlockType.COMMAND,
+                    text: formatMessage({
+                        id: 'keyEvents.clickMouseAt',
+                        default: 'press mouse at x: [X] y: [Y] for [HOLD_TIME] ms',
+                        description: 'press the mouse button at the position and release it after the time'
+                    }),
+                    func: 'clickMouseAt',
+                    arguments: {
+                        X: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '0'
+                        },
+                        Y: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '0'
+                        },
+                        HOLD_TIME: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '100'
+                        }
+                    }
+                },
+                {
+                    opcode: 'setMouseButton',
+                    blockType: BlockType.COMMAND,
+                    text: formatMessage({
+                        id: 'keyEvents.setMouseButton',
+                        default: '[MOUSE_STATE] mouse button',
+                        description: 'press or release the mouse button'
+                    }),
+                    func: 'setMouseButton',
+                    arguments: {
+                        MOUSE_STATE: {
+                            type: ArgumentType.STRING,
+                            menu: 'mouseStateMenu',
+                            defaultValue: 'down'
+                        }
+                    }
+                },
+                {
+                    opcode: 'dragMouse',
+                    blockType: BlockType.COMMAND,
+                    text: formatMessage({
+                        id: 'keyEvents.dragMouse',
+                        default: 'drag mouse from x: [X1] y: [Y1] to x: [X2] y: [Y2] in [TIME] ms',
+                        description: 'drag the mouse from the start to the end in the time'
+                    }),
+                    func: 'dragMouse',
+                    arguments: {
+                        X1: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '0'
+                        },
+                        Y1: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '0'
+                        },
+                        X2: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '100'
+                        },
+                        Y2: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '0'
+                        },
+                        TIME: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: '500'
+                        }
+                    }
                 }
             ],
             menus: {
                 keyValueMenu: {
                     acceptReporters: true,
                     items: this.KEY_VALUE_MENU
+                },
+                mouseStateMenu: {
+                    acceptReporters: false,
+                    items: this.MOUSE_STATE_MENU
                 }
             },
             translationMap: translations
@@ -220,6 +339,30 @@ class KeyEventsBlocks {
     }
 
     /**
+     * @return {array} - text and values for mouse button state menu
+     */
+    get MOUSE_STATE_MENU () {
+        return [
+            {
+                text: formatMessage({
+                    id: 'keyEvents.mouseState.down',
+                    default: 'press',
+                    description: 'press the mouse button'
+                }),
+                value: 'down'
+            },
+            {
+                text: formatMessage({
+                    id: 'keyEvents.mouseState.up',
+                    default: 'release',
+                    description: 'release the mouse button'
+                }),
+                value: 'up'
+            }
+        ];
+    }
+
+    /**
      * Dispatch a key down event, then a key up event after the hold time.
      * No key repeat events are dispatched while holding.
      * @param {object} args - the block's arguments.
@@ -255,10 +398,265 @@ class KeyEventsBlocks {
         keyProcess.keyEndUp();
     }
 
+    /**
+     * Mouse IO device of the runtime.
+     * @type {?Mouse}
+     */
+    get mouse () {
+        return (this.runtime && this.runtime.ioDevices) ? this.runtime.ioDevices.mouse : null;
+    }
+
+    /**
+     * Current mouse position in Scratch coordinates.
+     * @return {{x: number, y: number}} - position
+     */
+    getMousePosition () {
+        const mouse = this.mouse;
+        return {
+            x: (mouse && Number.isFinite(mouse.getScratchX())) ? mouse.getScratchX() : 0,
+            y: (mouse && Number.isFinite(mouse.getScratchY())) ? mouse.getScratchY() : 0
+        };
+    }
+
+    /**
+     * Convert Scratch coordinates into client coordinates of the stage canvas.
+     * Client coordinates are kept inside the canvas to be handled as a position on the stage.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     * @return {{x: number, y: number, canvasWidth: number, canvasHeight: number}} - client position
+     */
+    scratchToClient (scratchX, scratchY) {
+        const renderer = this.runtime.renderer;
+        const canvas = renderer && renderer.canvas;
+        const canvasWidth = (canvas && canvas.clientWidth) || 480;
+        const canvasHeight = (canvas && canvas.clientHeight) || 360;
+        const margin = 0.001;
+        const sx = Math.min(Math.max(scratchX, -240), 240);
+        const sy = Math.min(Math.max(scratchY, -180), 180);
+        const x = Math.min(Math.max(((sx / 480) + 0.5) * canvasWidth, margin), canvasWidth - margin);
+        const y = Math.min(Math.max((0.5 - (sy / 360)) * canvasHeight, margin), canvasHeight - margin);
+        return {x, y, canvasWidth, canvasHeight};
+    }
+
+    /**
+     * Post mouse data to the mouse IO device.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     * @param {object} [extra] - additional data such as isDown and wasDragged
+     */
+    postMouseData (scratchX, scratchY, extra) {
+        const mouse = this.mouse;
+        if (!mouse) return;
+        mouse.postData(Object.assign(this.scratchToClient(scratchX, scratchY), extra));
+    }
+
+    /**
+     * Find a draggable sprite at the position.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     * @return {?RenderedTarget} - draggable target at the position
+     */
+    pickDraggableTarget (scratchX, scratchY) {
+        const renderer = this.runtime.renderer;
+        if (!renderer) return null;
+        const draggableTargets = this.runtime.targets.filter(
+            target => !target.isStage && target.draggable && Number.isFinite(target.drawableID)
+        );
+        if (draggableTargets.length === 0) return null;
+        const client = this.scratchToClient(scratchX, scratchY);
+        const drawableID = renderer.pick(
+            client.x, client.y, 1, 1,
+            draggableTargets.map(target => target.drawableID)
+        );
+        if (drawableID === null || typeof drawableID === 'undefined') return null;
+        return draggableTargets.find(target => target.drawableID === drawableID) || null;
+    }
+
+    /**
+     * Move the mouse pointer. Drag the sprite if the mouse button is pressed on a draggable sprite.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     */
+    mouseMove (scratchX, scratchY) {
+        this.postMouseData(scratchX, scratchY);
+        const state = this.mouseState;
+        if (!state.isDown) return;
+        if (!state.dragTarget && state.dragCandidate &&
+            (scratchX !== state.downX || scratchY !== state.downY)) {
+            const target = state.dragCandidate;
+            state.dragCandidate = null;
+            if (this.runtime.targets.indexOf(target) >= 0) {
+                target.goToFront();
+                target.startDrag();
+                state.dragTarget = target;
+            }
+        }
+        if (state.dragTarget) {
+            state.dragTarget.setXY(
+                scratchX + state.dragOffsetX,
+                scratchY + state.dragOffsetY,
+                true
+            );
+        }
+    }
+
+    /**
+     * Press the mouse button at the current position.
+     */
+    mouseDown () {
+        const state = this.mouseState;
+        if (state.isDown) return;
+        const pos = this.getMousePosition();
+        const target = this.pickDraggableTarget(pos.x, pos.y);
+        state.isDown = true;
+        state.downX = pos.x;
+        state.downY = pos.y;
+        state.dragCandidate = target;
+        state.dragTarget = null;
+        if (target) {
+            state.dragOffsetX = target.x - pos.x;
+            state.dragOffsetY = target.y - pos.y;
+        }
+        this.postMouseData(pos.x, pos.y, {isDown: true});
+    }
+
+    /**
+     * Release the mouse button at the current position.
+     */
+    mouseUp () {
+        const state = this.mouseState;
+        if (!state.isDown) return;
+        const pos = this.getMousePosition();
+        const dragTarget = state.dragTarget;
+        state.isDown = false;
+        state.dragCandidate = null;
+        state.dragTarget = null;
+        if (dragTarget) {
+            dragTarget.stopDrag();
+        }
+        this.postMouseData(pos.x, pos.y, {isDown: false, wasDragged: !!dragTarget});
+    }
+
+    /**
+     * Stop the running mouse process (click or drag) and release the mouse button.
+     */
+    stopMouseProcess () {
+        if (this.mouseProcess) {
+            this.mouseProcess.finish();
+        }
+    }
+
+    /**
+     * Start a mouse process which is finished by calling 'finish' or the timer.
+     * @param {function} step - function called with the process to proceed it.
+     * @return {Promise} - a Promise that resolves when the process finished.
+     */
+    startMouseProcess (step) {
+        this.stopMouseProcess();
+        this.mouseUp();
+        const mouseProcess = {};
+        this.mouseProcess = mouseProcess;
+        return new Promise(resolve => {
+            mouseProcess.finish = () => {
+                if (mouseProcess.finished) return;
+                mouseProcess.finished = true;
+                clearTimeout(mouseProcess.timeout);
+                if (this.mouseProcess === mouseProcess) {
+                    this.mouseProcess = null;
+                }
+                this.mouseUp();
+                resolve();
+            };
+            step(mouseProcess);
+        });
+    }
+
+    /**
+     * Move the mouse pointer to the position.
+     * @param {object} args - the block's arguments.
+     * @param {number} args.X - x in Scratch coordinates
+     * @param {number} args.Y - y in Scratch coordinates
+     */
+    moveMouseTo (args) {
+        this.mouseMove(Cast.toNumber(args.X), Cast.toNumber(args.Y));
+    }
+
+    /**
+     * Press the mouse button at the position and release it after the hold time.
+     * @param {object} args - the block's arguments.
+     * @param {number} args.X - x in Scratch coordinates
+     * @param {number} args.Y - y in Scratch coordinates
+     * @param {number} args.HOLD_TIME - duration time to hold the button in ms
+     * @return {Promise} - a Promise that resolves after the button was released.
+     */
+    clickMouseAt (args) {
+        const x = Cast.toNumber(args.X);
+        const y = Cast.toNumber(args.Y);
+        const holdTime = Math.max(0, Cast.toNumber(args.HOLD_TIME));
+        return this.startMouseProcess(mouseProcess => {
+            this.mouseMove(x, y);
+            this.mouseDown();
+            mouseProcess.timeout = setTimeout(() => mouseProcess.finish(), holdTime);
+        });
+    }
+
+    /**
+     * Press or release the mouse button at the current position.
+     * @param {object} args - the block's arguments.
+     * @param {string} args.MOUSE_STATE - 'down' or 'up'
+     */
+    setMouseButton (args) {
+        this.stopMouseProcess();
+        if (args.MOUSE_STATE === 'down') {
+            this.mouseDown();
+        } else {
+            this.mouseUp();
+        }
+    }
+
+    /**
+     * Drag the mouse from the start position to the end position in the time.
+     * @param {object} args - the block's arguments.
+     * @param {number} args.X1 - start x in Scratch coordinates
+     * @param {number} args.Y1 - start y in Scratch coordinates
+     * @param {number} args.X2 - end x in Scratch coordinates
+     * @param {number} args.Y2 - end y in Scratch coordinates
+     * @param {number} args.TIME - duration time to drag in ms
+     * @return {Promise} - a Promise that resolves after the button was released.
+     */
+    dragMouse (args) {
+        const x1 = Cast.toNumber(args.X1);
+        const y1 = Cast.toNumber(args.Y1);
+        const x2 = Cast.toNumber(args.X2);
+        const y2 = Cast.toNumber(args.Y2);
+        const duration = Math.max(0, Cast.toNumber(args.TIME));
+        const interval = 1000 / 60;
+        return this.startMouseProcess(mouseProcess => {
+            this.mouseMove(x1, y1);
+            this.mouseDown();
+            const startTime = Date.now();
+            const step = () => {
+                const progress = duration > 0 ? Math.min((Date.now() - startTime) / duration, 1) : 1;
+                this.mouseMove(
+                    Math.round(x1 + ((x2 - x1) * progress)),
+                    Math.round(y1 + ((y2 - y1) * progress))
+                );
+                if (progress >= 1) {
+                    mouseProcess.finish();
+                    return;
+                }
+                mouseProcess.timeout = setTimeout(step, interval);
+            };
+            mouseProcess.timeout = setTimeout(step, interval);
+        });
+    }
+
     stopAll () {
         Object.keys(this.keyProcesses).forEach(keyValue => {
             this.stopKeyProcess(keyValue);
         });
+        this.stopMouseProcess();
+        this.mouseUp();
     }
 }
 

@@ -68,44 +68,44 @@ var entry = {
   translationMap: translations$1
 };
 
-function _classCallCheck(a, n) {
+function _classCallCheck$1(a, n) {
   if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
 }
 
-function _typeof(o) {
+function _typeof$1(o) {
   "@babel/helpers - typeof";
 
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+  return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
     return typeof o;
   } : function (o) {
     return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, _typeof(o);
+  }, _typeof$1(o);
 }
 
-function toPrimitive(t, e) {
-  if ("object" != _typeof(t) || !t) return t;
+function toPrimitive$1(t, e) {
+  if ("object" != _typeof$1(t) || !t) return t;
   var r;
   if ("undefined" != typeof Symbol && void 0 !== (r = t[Symbol.toPrimitive])) {
     var i = r.call(t, e);
-    if ("object" != _typeof(i)) return i;
+    if ("object" != _typeof$1(i)) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === e ? String : Number)(t);
 }
 
-function toPropertyKey(t) {
-  var i = toPrimitive(t, "string");
-  return "symbol" == _typeof(i) ? i : i + "";
+function toPropertyKey$1(t) {
+  var i = toPrimitive$1(t, "string");
+  return "symbol" == _typeof$1(i) ? i : i + "";
 }
 
-function _defineProperties(e, r) {
+function _defineProperties$1(e, r) {
   for (var t = 0; t < r.length; t++) {
     var o = r[t];
-    o.enumerable = o.enumerable || false, o.configurable = true, "value" in o && (o.writable = true), Object.defineProperty(e, toPropertyKey(o.key), o);
+    o.enumerable = o.enumerable || false, o.configurable = true, "value" in o && (o.writable = true), Object.defineProperty(e, toPropertyKey$1(o.key), o);
   }
 }
-function _createClass(e, r, t) {
-  return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
+function _createClass$1(e, r, t) {
+  return r && _defineProperties$1(e.prototype, r), t && _defineProperties$1(e, t), Object.defineProperty(e, "prototype", {
     writable: false
   }), e;
 }
@@ -217,13 +217,586 @@ function requireArgumentType() {
 var argumentTypeExports = requireArgumentType();
 var ArgumentType = /*@__PURE__*/getDefaultExportFromCjs(argumentTypeExports);
 
+function _classCallCheck(a, n) {
+  if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
+}
+
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+
+function toPrimitive(t, r) {
+  if ("object" != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r);
+    if ("object" != _typeof(i)) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof(i) ? i : i + "";
+}
+
+function _defineProperties(e, r) {
+  for (var t = 0; t < r.length; t++) {
+    var o = r[t];
+    o.enumerable = o.enumerable || false, o.configurable = true, "value" in o && (o.writable = true), Object.defineProperty(e, toPropertyKey(o.key), o);
+  }
+}
+function _createClass(e, r, t) {
+  return t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
+    writable: false
+  }), e;
+}
+
+var color;
+var hasRequiredColor;
+function requireColor() {
+  if (hasRequiredColor) return color;
+  hasRequiredColor = 1;
+  var Color = /*#__PURE__*/function () {
+    function Color() {
+      _classCallCheck(this, Color);
+    }
+    return _createClass(Color, null, [{
+      key: "RGB_BLACK",
+      get:
+      /**
+       * @typedef {object} RGBObject - An object representing a color in RGB format.
+       * @property {number} r - the red component, in the range [0, 255].
+       * @property {number} g - the green component, in the range [0, 255].
+       * @property {number} b - the blue component, in the range [0, 255].
+       */
+
+      /**
+       * @typedef {object} HSVObject - An object representing a color in HSV format.
+       * @property {number} h - hue, in the range [0-359).
+       * @property {number} s - saturation, in the range [0,1].
+       * @property {number} v - value, in the range [0,1].
+       */
+
+      /** @type {RGBObject} */
+      function get() {
+        return {
+          r: 0,
+          g: 0,
+          b: 0
+        };
+      }
+
+      /** @type {RGBObject} */
+    }, {
+      key: "RGB_WHITE",
+      get: function get() {
+        return {
+          r: 255,
+          g: 255,
+          b: 255
+        };
+      }
+
+      /**
+       * Convert a Scratch decimal color to a hex string, #RRGGBB.
+       * @param {number} decimal RGB color as a decimal.
+       * @returns {string} RGB color as #RRGGBB hex string.
+       */
+    }, {
+      key: "decimalToHex",
+      value: function decimalToHex(decimal) {
+        if (decimal < 0) {
+          decimal += 0xFFFFFF + 1;
+        }
+        var hex = Number(decimal).toString(16);
+        hex = "#".concat('000000'.substr(0, 6 - hex.length)).concat(hex);
+        return hex;
+      }
+
+      /**
+       * Convert a Scratch decimal color to an RGB color object.
+       * @param {number} decimal RGB color as decimal.
+       * @returns {RGBObject} rgb - {r: red [0,255], g: green [0,255], b: blue [0,255]}.
+       */
+    }, {
+      key: "decimalToRgb",
+      value: function decimalToRgb(decimal) {
+        var a = decimal >> 24 & 0xFF;
+        var r = decimal >> 16 & 0xFF;
+        var g = decimal >> 8 & 0xFF;
+        var b = decimal & 0xFF;
+        return {
+          r: r,
+          g: g,
+          b: b,
+          a: a > 0 ? a : 255
+        };
+      }
+
+      /**
+       * Convert a hex color (e.g., F00, #03F, #0033FF) to an RGB color object.
+       * CC-BY-SA Tim Down:
+       * https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+       * @param {!string} hex Hex representation of the color.
+       * @returns {RGBObject} null on failure, or rgb: {r: red [0,255], g: green [0,255], b: blue [0,255]}.
+       */
+    }, {
+      key: "hexToRgb",
+      value: function hexToRgb(hex) {
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+          return r + r + g + g + b + b;
+        });
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        } : null;
+      }
+
+      /**
+       * Convert an RGB color object to a hex color.
+       * @param {RGBObject} rgb - {r: red [0,255], g: green [0,255], b: blue [0,255]}.
+       * @returns {!string} Hex representation of the color.
+       */
+    }, {
+      key: "rgbToHex",
+      value: function rgbToHex(rgb) {
+        return Color.decimalToHex(Color.rgbToDecimal(rgb));
+      }
+
+      /**
+       * Convert an RGB color object to a Scratch decimal color.
+       * @param {RGBObject} rgb - {r: red [0,255], g: green [0,255], b: blue [0,255]}.
+       * @returns {!number} Number representing the color.
+       */
+    }, {
+      key: "rgbToDecimal",
+      value: function rgbToDecimal(rgb) {
+        return (rgb.r << 16) + (rgb.g << 8) + rgb.b;
+      }
+
+      /**
+       * Convert a hex color (e.g., F00, #03F, #0033FF) to a decimal color number.
+       * @param {!string} hex Hex representation of the color.
+       * @returns {!number} Number representing the color.
+       */
+    }, {
+      key: "hexToDecimal",
+      value: function hexToDecimal(hex) {
+        return Color.rgbToDecimal(Color.hexToRgb(hex));
+      }
+
+      /**
+       * Convert an HSV color to RGB format.
+       * @param {HSVObject} hsv - {h: hue [0,360), s: saturation [0,1], v: value [0,1]}
+       * @returns {RGBObject} rgb - {r: red [0,255], g: green [0,255], b: blue [0,255]}.
+       */
+    }, {
+      key: "hsvToRgb",
+      value: function hsvToRgb(hsv) {
+        var h = hsv.h % 360;
+        if (h < 0) h += 360;
+        var s = Math.max(0, Math.min(hsv.s, 1));
+        var v = Math.max(0, Math.min(hsv.v, 1));
+        var i = Math.floor(h / 60);
+        var f = h / 60 - i;
+        var p = v * (1 - s);
+        var q = v * (1 - s * f);
+        var t = v * (1 - s * (1 - f));
+        var r;
+        var g;
+        var b;
+        switch (i) {
+          default:
+          case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+          case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+          case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+          case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+          case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+          case 5:
+            r = v;
+            g = p;
+            b = q;
+            break;
+        }
+        return {
+          r: Math.floor(r * 255),
+          g: Math.floor(g * 255),
+          b: Math.floor(b * 255)
+        };
+      }
+
+      /**
+       * Convert an RGB color to HSV format.
+       * @param {RGBObject} rgb - {r: red [0,255], g: green [0,255], b: blue [0,255]}.
+       * @returns {HSVObject} hsv - {h: hue [0,360), s: saturation [0,1], v: value [0,1]}
+       */
+    }, {
+      key: "rgbToHsv",
+      value: function rgbToHsv(rgb) {
+        var r = rgb.r / 255;
+        var g = rgb.g / 255;
+        var b = rgb.b / 255;
+        var x = Math.min(Math.min(r, g), b);
+        var v = Math.max(Math.max(r, g), b);
+
+        // For grays, hue will be arbitrarily reported as zero. Otherwise, calculate
+        var h = 0;
+        var s = 0;
+        if (x !== v) {
+          var f = r === x ? g - b : g === x ? b - r : r - g;
+          var i = r === x ? 3 : g === x ? 5 : 1;
+          h = (i - f / (v - x)) * 60 % 360;
+          s = (v - x) / v;
+        }
+        return {
+          h: h,
+          s: s,
+          v: v
+        };
+      }
+
+      /**
+       * Linear interpolation between rgb0 and rgb1.
+       * @param {RGBObject} rgb0 - the color corresponding to fraction1 <= 0.
+       * @param {RGBObject} rgb1 - the color corresponding to fraction1 >= 1.
+       * @param {number} fraction1 - the interpolation parameter. If this is 0.5, for example, mix the two colors equally.
+       * @returns {RGBObject} the interpolated color.
+       */
+    }, {
+      key: "mixRgb",
+      value: function mixRgb(rgb0, rgb1, fraction1) {
+        if (fraction1 <= 0) return rgb0;
+        if (fraction1 >= 1) return rgb1;
+        var fraction0 = 1 - fraction1;
+        return {
+          r: fraction0 * rgb0.r + fraction1 * rgb1.r,
+          g: fraction0 * rgb0.g + fraction1 * rgb1.g,
+          b: fraction0 * rgb0.b + fraction1 * rgb1.b
+        };
+      }
+    }]);
+  }();
+  color = Color;
+  return color;
+}
+
+var cast;
+var hasRequiredCast;
+function requireCast() {
+  if (hasRequiredCast) return cast;
+  hasRequiredCast = 1;
+  var Color = requireColor();
+
+  /**
+   * @file
+   * Utilities for casting and comparing Scratch data-types.
+   * Scratch behaves slightly differently from JavaScript in many respects,
+   * and these differences should be encapsulated below.
+   * For example, in Scratch, add(1, join("hello", world")) -> 1.
+   * This is because "hello world" is cast to 0.
+   * In JavaScript, 1 + Number("hello" + "world") would give you NaN.
+   * Use when coercing a value before computation.
+   */
+  var Cast = /*#__PURE__*/function () {
+    function Cast() {
+      _classCallCheck(this, Cast);
+    }
+    return _createClass(Cast, null, [{
+      key: "normalizeNumberString",
+      value:
+      /**
+       * Normalize full-width digits/signs to half-width for number parsing.
+       * Non-string values are returned unchanged.
+       * @param {*} value Value to normalize.
+       * @returns {*} Normalized value.
+       */
+      function normalizeNumberString(value) {
+        if (typeof value === 'string') {
+          // Replace full-width numbers with half-width ones.
+          value = value.replace(/[０-９＋．ｅ]/g, function (s) {
+            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+          });
+          value = value.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
+        }
+        return value;
+      }
+
+      /**
+       * Scratch cast to number.
+       * Treats NaN as 0.
+       * In Scratch 2.0, this is captured by `interp.numArg.`
+       * @param {*} value Value to cast to number.
+       * @returns {number} The Scratch-casted number value.
+       */
+    }, {
+      key: "toNumber",
+      value: function toNumber(value) {
+        // If value is already a number we don't need to coerce it with
+        // Number().
+        if (typeof value === 'number') {
+          // Scratch treats NaN as 0, when needed as a number.
+          // E.g., 0 + NaN -> 0.
+          if (Number.isNaN(value)) {
+            return 0;
+          }
+          return value;
+        }
+        value = Cast.normalizeNumberString(value);
+        var n = Number(value);
+        if (Number.isNaN(n)) {
+          // Scratch treats NaN as 0, when needed as a number.
+          // E.g., 0 + NaN -> 0.
+          return 0;
+        }
+        return n;
+      }
+
+      /**
+       * Scratch cast to boolean.
+       * In Scratch 2.0, this is captured by `interp.boolArg.`
+       * Treats some string values differently from JavaScript.
+       * @param {*} value Value to cast to boolean.
+       * @returns {boolean} The Scratch-casted boolean value.
+       */
+    }, {
+      key: "toBoolean",
+      value: function toBoolean(value) {
+        // Already a boolean?
+        if (typeof value === 'boolean') {
+          return value;
+        }
+        if (typeof value === 'string') {
+          // These specific strings are treated as false in Scratch.
+          if (value === '' || value === '0' || value.toLowerCase() === 'false') {
+            return false;
+          }
+          // All other strings treated as true.
+          return true;
+        }
+        // Coerce other values and numbers.
+        return Boolean(value);
+      }
+
+      /**
+       * Scratch cast to string.
+       * @param {*} value Value to cast to string.
+       * @returns {string} The Scratch-casted string value.
+       */
+    }, {
+      key: "toString",
+      value: function toString(value) {
+        return String(value).replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+      }
+
+      /**
+       * Cast any Scratch argument to an RGB color array to be used for the renderer.
+       * @param {*} value Value to convert to RGB color array.
+       * @returns {Array.<number>} [r,g,b], values between 0-255.
+       */
+    }, {
+      key: "toRgbColorList",
+      value: function toRgbColorList(value) {
+        var color = Cast.toRgbColorObject(value);
+        return [color.r, color.g, color.b];
+      }
+
+      /**
+       * Cast any Scratch argument to an RGB color object to be used for the renderer.
+       * @param {*} value Value to convert to RGB color object.
+       * @returns {RGBOject} [r,g,b], values between 0-255.
+       */
+    }, {
+      key: "toRgbColorObject",
+      value: function toRgbColorObject(value) {
+        var color;
+        if (typeof value === 'string' && value.substring(0, 1) === '#') {
+          color = Color.hexToRgb(value);
+
+          // If the color wasn't *actually* a hex color, cast to black
+          if (!color) color = {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 255
+          };
+        } else {
+          color = Color.decimalToRgb(Cast.toNumber(value));
+        }
+        return color;
+      }
+
+      /**
+       * Determine if a Scratch argument is a white space string (or null / empty).
+       * @param {*} val value to check.
+       * @returns {boolean} True if the argument is all white spaces or null / empty.
+       */
+    }, {
+      key: "isWhiteSpace",
+      value: function isWhiteSpace(val) {
+        return val === null || typeof val === 'string' && val.trim().length === 0;
+      }
+
+      /**
+       * Compare two values, using Scratch cast, case-insensitive string compare, etc.
+       * In Scratch 2.0, this is captured by `interp.compare.`
+       * @param {*} v1 First value to compare.
+       * @param {*} v2 Second value to compare.
+       * @returns {number} Negative number if v1 < v2; 0 if equal; positive otherwise.
+       */
+    }, {
+      key: "compare",
+      value: function compare(v1, v2) {
+        var n1 = Number(Cast.normalizeNumberString(v1));
+        var n2 = Number(Cast.normalizeNumberString(v2));
+        if (n1 === 0 && Cast.isWhiteSpace(v1)) {
+          n1 = NaN;
+        } else if (n2 === 0 && Cast.isWhiteSpace(v2)) {
+          n2 = NaN;
+        }
+        if (isNaN(n1) || isNaN(n2)) {
+          // At least one argument can't be converted to a number.
+          // Scratch compares strings as case insensitive.
+          var s1 = Cast.toString(v1).toLowerCase();
+          var s2 = Cast.toString(v2).toLowerCase();
+          if (s1 < s2) {
+            return -1;
+          } else if (s1 > s2) {
+            return 1;
+          }
+          return 0;
+        }
+        // Handle the special case of Infinity
+        if (n1 === Infinity && n2 === Infinity || n1 === -Infinity && n2 === -Infinity) {
+          return 0;
+        }
+        // Compare as numbers.
+        return n1 - n2;
+      }
+
+      /**
+       * Determine if a Scratch argument number represents a round integer.
+       * @param {*} val Value to check.
+       * @returns {boolean} True if number looks like an integer.
+       */
+    }, {
+      key: "isInt",
+      value: function isInt(val) {
+        // Values that are already numbers.
+        if (typeof val === 'number') {
+          if (isNaN(val)) {
+            // NaN is considered an integer.
+            return true;
+          }
+          // True if it's "round" (e.g., 2.0 and 2).
+          return val === parseInt(val, 10);
+        } else if (typeof val === 'boolean') {
+          // `True` and `false` always represent integer after Scratch cast.
+          return true;
+        } else if (typeof val === 'string') {
+          // If it contains a decimal point, don't consider it an int.
+          return val.indexOf('.') < 0;
+        }
+        return false;
+      }
+    }, {
+      key: "LIST_INVALID",
+      get: function get() {
+        return 'INVALID';
+      }
+    }, {
+      key: "LIST_ALL",
+      get: function get() {
+        return 'ALL';
+      }
+
+      /**
+       * Compute a 1-based index into a list, based on a Scratch argument.
+       * Two special cases may be returned:
+       * LIST_ALL: if the block is referring to all of the items in the list.
+       * LIST_INVALID: if the index was invalid in any way.
+       * @param {*} index Scratch arg, including 1-based numbers or special cases.
+       * @param {number} length Length of the list.
+       * @param {boolean} acceptAll Whether it should accept "all" or not.
+       * @returns {(number|string)} 1-based index for list, LIST_ALL, or LIST_INVALID.
+       */
+    }, {
+      key: "toListIndex",
+      value: function toListIndex(index, length, acceptAll) {
+        if (typeof index !== 'number') {
+          if (index === 'all') {
+            return acceptAll ? Cast.LIST_ALL : Cast.LIST_INVALID;
+          }
+          if (index === 'last') {
+            if (length > 0) {
+              return length;
+            }
+            return Cast.LIST_INVALID;
+          } else if (index === 'random' || index === 'any') {
+            if (length > 0) {
+              return 1 + Math.floor(Math.random() * length);
+            }
+            return Cast.LIST_INVALID;
+          }
+        }
+        index = Math.floor(Cast.toNumber(index));
+        if (index < 1 || index > length) {
+          return Cast.LIST_INVALID;
+        }
+        return index;
+      }
+    }]);
+  }();
+  cast = Cast;
+  return cast;
+}
+
+var castExports = requireCast();
+var Cast = /*@__PURE__*/getDefaultExportFromCjs(castExports);
+
 var ja = {
 	"keyEvents.pressKeyWhile": "[KEY_VALUE] キーを [HOLD_TIME] ミリ秒間押す",
 	"keyEvents.keyValue.space": "スペース",
 	"keyEvents.keyValue.arrowUp": "上向き矢印",
 	"keyEvents.keyValue.arrowDown": "下向き矢印",
 	"keyEvents.keyValue.arrowRight": "右向き矢印",
-	"keyEvents.keyValue.arrowLeft": "左向き矢印"
+	"keyEvents.keyValue.arrowLeft": "左向き矢印",
+	"keyEvents.moveMouseTo": "マウスのポインターを x座標:[X] y座標:[Y] へ動かす",
+	"keyEvents.clickMouseAt": "x座標:[X] y座標:[Y] でマウスを [HOLD_TIME] ミリ秒間押す",
+	"keyEvents.setMouseButton": "マウスボタンを [MOUSE_STATE]",
+	"keyEvents.mouseState.down": "押す",
+	"keyEvents.mouseState.up": "離す",
+	"keyEvents.dragMouse": "x座標:[X1] y座標:[Y1] から x座標:[X2] y座標:[Y2] まで [TIME] ミリ秒でドラッグする"
 };
 var translations = {
 	ja: ja,
@@ -233,7 +806,13 @@ var translations = {
 	"keyEvents.keyValue.arrowUp": "うえむきやじるし",
 	"keyEvents.keyValue.arrowDown": "したむきやじるし",
 	"keyEvents.keyValue.arrowRight": "みぎむきやじるし",
-	"keyEvents.keyValue.arrowLeft": "ひだりむきやじるし"
+	"keyEvents.keyValue.arrowLeft": "ひだりむきやじるし",
+	"keyEvents.moveMouseTo": "マウスのポインターを xざひょう:[X] yざひょう:[Y] へうごかす",
+	"keyEvents.clickMouseAt": "xざひょう:[X] yざひょう:[Y] でマウスを [HOLD_TIME] みりびょうかんおす",
+	"keyEvents.setMouseButton": "マウスボタンを [MOUSE_STATE]",
+	"keyEvents.mouseState.down": "おす",
+	"keyEvents.mouseState.up": "はなす",
+	"keyEvents.dragMouse": "xざひょう:[X1] yざひょう:[Y1] から xざひょう:[X2] yざひょう:[Y2] まで [TIME] みりびょうでドラッグする"
 }
 };
 
@@ -282,7 +861,7 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
    * @param {Runtime} runtime - the Scratch 3.0 runtime.
    */
   function KeyEventsBlocks(runtime) {
-    _classCallCheck(this, KeyEventsBlocks);
+    _classCallCheck$1(this, KeyEventsBlocks);
     /**
      * The Scratch 3.0 runtime.
      * @type {Runtime}
@@ -301,12 +880,32 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
      * All processing key event now.
      */
     this.keyProcesses = {};
+
+    /**
+     * Mouse state which is controlled by this extension.
+     * @type {object}
+     */
+    this.mouseState = {
+      isDown: false,
+      downX: 0,
+      downY: 0,
+      dragCandidate: null,
+      dragOffsetX: 0,
+      dragOffsetY: 0,
+      dragTarget: null
+    };
+
+    /**
+     * Running mouse process (click or drag) now.
+     * @type {?object}
+     */
+    this.mouseProcess = null;
   }
 
   /**
    * @returns {object} metadata for this extension and its blocks.
    */
-  return _createClass(KeyEventsBlocks, [{
+  return _createClass$1(KeyEventsBlocks, [{
     key: "getInfo",
     value: function getInfo() {
       setupTranslations();
@@ -337,11 +936,104 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
               defaultValue: '100'
             }
           }
+        }, '---', {
+          opcode: 'moveMouseTo',
+          blockType: BlockType.COMMAND,
+          text: formatMessage({
+            id: 'keyEvents.moveMouseTo',
+            default: 'move mouse pointer to x: [X] y: [Y]',
+            description: 'move the mouse pointer to the position'
+          }),
+          func: 'moveMouseTo',
+          arguments: {
+            X: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '0'
+            },
+            Y: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '0'
+            }
+          }
+        }, {
+          opcode: 'clickMouseAt',
+          blockType: BlockType.COMMAND,
+          text: formatMessage({
+            id: 'keyEvents.clickMouseAt',
+            default: 'press mouse at x: [X] y: [Y] for [HOLD_TIME] ms',
+            description: 'press the mouse button at the position and release it after the time'
+          }),
+          func: 'clickMouseAt',
+          arguments: {
+            X: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '0'
+            },
+            Y: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '0'
+            },
+            HOLD_TIME: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '100'
+            }
+          }
+        }, {
+          opcode: 'setMouseButton',
+          blockType: BlockType.COMMAND,
+          text: formatMessage({
+            id: 'keyEvents.setMouseButton',
+            default: '[MOUSE_STATE] mouse button',
+            description: 'press or release the mouse button'
+          }),
+          func: 'setMouseButton',
+          arguments: {
+            MOUSE_STATE: {
+              type: ArgumentType.STRING,
+              menu: 'mouseStateMenu',
+              defaultValue: 'down'
+            }
+          }
+        }, {
+          opcode: 'dragMouse',
+          blockType: BlockType.COMMAND,
+          text: formatMessage({
+            id: 'keyEvents.dragMouse',
+            default: 'drag mouse from x: [X1] y: [Y1] to x: [X2] y: [Y2] in [TIME] ms',
+            description: 'drag the mouse from the start to the end in the time'
+          }),
+          func: 'dragMouse',
+          arguments: {
+            X1: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '0'
+            },
+            Y1: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '0'
+            },
+            X2: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '100'
+            },
+            Y2: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '0'
+            },
+            TIME: {
+              type: ArgumentType.NUMBER,
+              defaultValue: '500'
+            }
+          }
         }],
         menus: {
           keyValueMenu: {
             acceptReporters: true,
             items: this.KEY_VALUE_MENU
+          },
+          mouseStateMenu: {
+            acceptReporters: false,
+            items: this.MOUSE_STATE_MENU
           }
         },
         translationMap: translations
@@ -408,6 +1100,29 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
     }
 
     /**
+     * @return {array} - text and values for mouse button state menu
+     */
+  }, {
+    key: "MOUSE_STATE_MENU",
+    get: function get() {
+      return [{
+        text: formatMessage({
+          id: 'keyEvents.mouseState.down',
+          default: 'press',
+          description: 'press the mouse button'
+        }),
+        value: 'down'
+      }, {
+        text: formatMessage({
+          id: 'keyEvents.mouseState.up',
+          default: 'release',
+          description: 'release the mouse button'
+        }),
+        value: 'up'
+      }];
+    }
+
+    /**
      * Dispatch a key down event, then a key up event after the hold time.
      * No key repeat events are dispatched while holding.
      * @param {object} args - the block's arguments.
@@ -453,13 +1168,304 @@ var KeyEventsBlocks = /*#__PURE__*/function () {
       if (!keyProcess) return;
       keyProcess.keyEndUp();
     }
+
+    /**
+     * Mouse IO device of the runtime.
+     * @type {?Mouse}
+     */
+  }, {
+    key: "mouse",
+    get: function get() {
+      return this.runtime && this.runtime.ioDevices ? this.runtime.ioDevices.mouse : null;
+    }
+
+    /**
+     * Current mouse position in Scratch coordinates.
+     * @return {{x: number, y: number}} - position
+     */
+  }, {
+    key: "getMousePosition",
+    value: function getMousePosition() {
+      var mouse = this.mouse;
+      return {
+        x: mouse && Number.isFinite(mouse.getScratchX()) ? mouse.getScratchX() : 0,
+        y: mouse && Number.isFinite(mouse.getScratchY()) ? mouse.getScratchY() : 0
+      };
+    }
+
+    /**
+     * Convert Scratch coordinates into client coordinates of the stage canvas.
+     * Client coordinates are kept inside the canvas to be handled as a position on the stage.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     * @return {{x: number, y: number, canvasWidth: number, canvasHeight: number}} - client position
+     */
+  }, {
+    key: "scratchToClient",
+    value: function scratchToClient(scratchX, scratchY) {
+      var renderer = this.runtime.renderer;
+      var canvas = renderer && renderer.canvas;
+      var canvasWidth = canvas && canvas.clientWidth || 480;
+      var canvasHeight = canvas && canvas.clientHeight || 360;
+      var margin = 0.001;
+      var sx = Math.min(Math.max(scratchX, -240), 240);
+      var sy = Math.min(Math.max(scratchY, -180), 180);
+      var x = Math.min(Math.max((sx / 480 + 0.5) * canvasWidth, margin), canvasWidth - margin);
+      var y = Math.min(Math.max((0.5 - sy / 360) * canvasHeight, margin), canvasHeight - margin);
+      return {
+        x: x,
+        y: y,
+        canvasWidth: canvasWidth,
+        canvasHeight: canvasHeight
+      };
+    }
+
+    /**
+     * Post mouse data to the mouse IO device.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     * @param {object} [extra] - additional data such as isDown and wasDragged
+     */
+  }, {
+    key: "postMouseData",
+    value: function postMouseData(scratchX, scratchY, extra) {
+      var mouse = this.mouse;
+      if (!mouse) return;
+      mouse.postData(Object.assign(this.scratchToClient(scratchX, scratchY), extra));
+    }
+
+    /**
+     * Find a draggable sprite at the position.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     * @return {?RenderedTarget} - draggable target at the position
+     */
+  }, {
+    key: "pickDraggableTarget",
+    value: function pickDraggableTarget(scratchX, scratchY) {
+      var renderer = this.runtime.renderer;
+      if (!renderer) return null;
+      var draggableTargets = this.runtime.targets.filter(function (target) {
+        return !target.isStage && target.draggable && Number.isFinite(target.drawableID);
+      });
+      if (draggableTargets.length === 0) return null;
+      var client = this.scratchToClient(scratchX, scratchY);
+      var drawableID = renderer.pick(client.x, client.y, 1, 1, draggableTargets.map(function (target) {
+        return target.drawableID;
+      }));
+      if (drawableID === null || typeof drawableID === 'undefined') return null;
+      return draggableTargets.find(function (target) {
+        return target.drawableID === drawableID;
+      }) || null;
+    }
+
+    /**
+     * Move the mouse pointer. Drag the sprite if the mouse button is pressed on a draggable sprite.
+     * @param {number} scratchX - x in Scratch coordinates
+     * @param {number} scratchY - y in Scratch coordinates
+     */
+  }, {
+    key: "mouseMove",
+    value: function mouseMove(scratchX, scratchY) {
+      this.postMouseData(scratchX, scratchY);
+      var state = this.mouseState;
+      if (!state.isDown) return;
+      if (!state.dragTarget && state.dragCandidate && (scratchX !== state.downX || scratchY !== state.downY)) {
+        var target = state.dragCandidate;
+        state.dragCandidate = null;
+        if (this.runtime.targets.indexOf(target) >= 0) {
+          target.goToFront();
+          target.startDrag();
+          state.dragTarget = target;
+        }
+      }
+      if (state.dragTarget) {
+        state.dragTarget.setXY(scratchX + state.dragOffsetX, scratchY + state.dragOffsetY, true);
+      }
+    }
+
+    /**
+     * Press the mouse button at the current position.
+     */
+  }, {
+    key: "mouseDown",
+    value: function mouseDown() {
+      var state = this.mouseState;
+      if (state.isDown) return;
+      var pos = this.getMousePosition();
+      var target = this.pickDraggableTarget(pos.x, pos.y);
+      state.isDown = true;
+      state.downX = pos.x;
+      state.downY = pos.y;
+      state.dragCandidate = target;
+      state.dragTarget = null;
+      if (target) {
+        state.dragOffsetX = target.x - pos.x;
+        state.dragOffsetY = target.y - pos.y;
+      }
+      this.postMouseData(pos.x, pos.y, {
+        isDown: true
+      });
+    }
+
+    /**
+     * Release the mouse button at the current position.
+     */
+  }, {
+    key: "mouseUp",
+    value: function mouseUp() {
+      var state = this.mouseState;
+      if (!state.isDown) return;
+      var pos = this.getMousePosition();
+      var dragTarget = state.dragTarget;
+      state.isDown = false;
+      state.dragCandidate = null;
+      state.dragTarget = null;
+      if (dragTarget) {
+        dragTarget.stopDrag();
+      }
+      this.postMouseData(pos.x, pos.y, {
+        isDown: false,
+        wasDragged: !!dragTarget
+      });
+    }
+
+    /**
+     * Stop the running mouse process (click or drag) and release the mouse button.
+     */
+  }, {
+    key: "stopMouseProcess",
+    value: function stopMouseProcess() {
+      if (this.mouseProcess) {
+        this.mouseProcess.finish();
+      }
+    }
+
+    /**
+     * Start a mouse process which is finished by calling 'finish' or the timer.
+     * @param {function} step - function called with the process to proceed it.
+     * @return {Promise} - a Promise that resolves when the process finished.
+     */
+  }, {
+    key: "startMouseProcess",
+    value: function startMouseProcess(step) {
+      var _this2 = this;
+      this.stopMouseProcess();
+      this.mouseUp();
+      var mouseProcess = {};
+      this.mouseProcess = mouseProcess;
+      return new Promise(function (resolve) {
+        mouseProcess.finish = function () {
+          if (mouseProcess.finished) return;
+          mouseProcess.finished = true;
+          clearTimeout(mouseProcess.timeout);
+          if (_this2.mouseProcess === mouseProcess) {
+            _this2.mouseProcess = null;
+          }
+          _this2.mouseUp();
+          resolve();
+        };
+        step(mouseProcess);
+      });
+    }
+
+    /**
+     * Move the mouse pointer to the position.
+     * @param {object} args - the block's arguments.
+     * @param {number} args.X - x in Scratch coordinates
+     * @param {number} args.Y - y in Scratch coordinates
+     */
+  }, {
+    key: "moveMouseTo",
+    value: function moveMouseTo(args) {
+      this.mouseMove(Cast.toNumber(args.X), Cast.toNumber(args.Y));
+    }
+
+    /**
+     * Press the mouse button at the position and release it after the hold time.
+     * @param {object} args - the block's arguments.
+     * @param {number} args.X - x in Scratch coordinates
+     * @param {number} args.Y - y in Scratch coordinates
+     * @param {number} args.HOLD_TIME - duration time to hold the button in ms
+     * @return {Promise} - a Promise that resolves after the button was released.
+     */
+  }, {
+    key: "clickMouseAt",
+    value: function clickMouseAt(args) {
+      var _this3 = this;
+      var x = Cast.toNumber(args.X);
+      var y = Cast.toNumber(args.Y);
+      var holdTime = Math.max(0, Cast.toNumber(args.HOLD_TIME));
+      return this.startMouseProcess(function (mouseProcess) {
+        _this3.mouseMove(x, y);
+        _this3.mouseDown();
+        mouseProcess.timeout = setTimeout(function () {
+          return mouseProcess.finish();
+        }, holdTime);
+      });
+    }
+
+    /**
+     * Press or release the mouse button at the current position.
+     * @param {object} args - the block's arguments.
+     * @param {string} args.MOUSE_STATE - 'down' or 'up'
+     */
+  }, {
+    key: "setMouseButton",
+    value: function setMouseButton(args) {
+      this.stopMouseProcess();
+      if (args.MOUSE_STATE === 'down') {
+        this.mouseDown();
+      } else {
+        this.mouseUp();
+      }
+    }
+
+    /**
+     * Drag the mouse from the start position to the end position in the time.
+     * @param {object} args - the block's arguments.
+     * @param {number} args.X1 - start x in Scratch coordinates
+     * @param {number} args.Y1 - start y in Scratch coordinates
+     * @param {number} args.X2 - end x in Scratch coordinates
+     * @param {number} args.Y2 - end y in Scratch coordinates
+     * @param {number} args.TIME - duration time to drag in ms
+     * @return {Promise} - a Promise that resolves after the button was released.
+     */
+  }, {
+    key: "dragMouse",
+    value: function dragMouse(args) {
+      var _this4 = this;
+      var x1 = Cast.toNumber(args.X1);
+      var y1 = Cast.toNumber(args.Y1);
+      var x2 = Cast.toNumber(args.X2);
+      var y2 = Cast.toNumber(args.Y2);
+      var duration = Math.max(0, Cast.toNumber(args.TIME));
+      var interval = 1000 / 60;
+      return this.startMouseProcess(function (mouseProcess) {
+        _this4.mouseMove(x1, y1);
+        _this4.mouseDown();
+        var startTime = Date.now();
+        var _step = function step() {
+          var progress = duration > 0 ? Math.min((Date.now() - startTime) / duration, 1) : 1;
+          _this4.mouseMove(Math.round(x1 + (x2 - x1) * progress), Math.round(y1 + (y2 - y1) * progress));
+          if (progress >= 1) {
+            mouseProcess.finish();
+            return;
+          }
+          mouseProcess.timeout = setTimeout(_step, interval);
+        };
+        mouseProcess.timeout = setTimeout(_step, interval);
+      });
+    }
   }, {
     key: "stopAll",
     value: function stopAll() {
-      var _this2 = this;
+      var _this5 = this;
       Object.keys(this.keyProcesses).forEach(function (keyValue) {
-        _this2.stopKeyProcess(keyValue);
+        _this5.stopKeyProcess(keyValue);
       });
+      this.stopMouseProcess();
+      this.mouseUp();
     }
   }], [{
     key: "formatMessage",

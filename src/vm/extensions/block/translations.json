@@ -5,7 +5,13 @@
     "keyEvents.keyValue.arrowUp": "上向き矢印",
     "keyEvents.keyValue.arrowDown": "下向き矢印",
     "keyEvents.keyValue.arrowRight": "右向き矢印",
-    "keyEvents.keyValue.arrowLeft": "左向き矢印"
+    "keyEvents.keyValue.arrowLeft": "左向き矢印",
+    "keyEvents.moveMouseTo": "マウスのポインターを x座標:[X] y座標:[Y] へ動かす",
+    "keyEvents.clickMouseAt": "x座標:[X] y座標:[Y] でマウスを [HOLD_TIME] ミリ秒間押す",
+    "keyEvents.setMouseButton": "マウスボタンを [MOUSE_STATE]",
+    "keyEvents.mouseState.down": "押す",
+    "keyEvents.mouseState.up": "離す",
+    "keyEvents.dragMouse": "x座標:[X1] y座標:[Y1] から x座標:[X2] y座標:[Y2] まで [TIME] ミリ秒でドラッグする"
   },
   "ja-Hira": {
     "keyEvents.pressKeyWhile": "[KEY_VALUE] キーを [HOLD_TIME] みりびょうかんおす",
@@ -13,6 +19,12 @@
     "keyEvents.keyValue.arrowUp": "うえむきやじるし",
     "keyEvents.keyValue.arrowDown": "したむきやじるし",
     "keyEvents.keyValue.arrowRight": "みぎむきやじるし",
-    "keyEvents.keyValue.arrowLeft": "ひだりむきやじるし"
+    "keyEvents.keyValue.arrowLeft": "ひだりむきやじるし",
+    "keyEvents.moveMouseTo": "マウスのポインターを xざひょう:[X] yざひょう:[Y] へうごかす",
+    "keyEvents.clickMouseAt": "xざひょう:[X] yざひょう:[Y] でマウスを [HOLD_TIME] みりびょうかんおす",
+    "keyEvents.setMouseButton": "マウスボタンを [MOUSE_STATE]",
+    "keyEvents.mouseState.down": "おす",
+    "keyEvents.mouseState.up": "はなす",
+    "keyEvents.dragMouse": "xざひょう:[X1] yざひょう:[Y1] から xざひょう:[X2] yざひょう:[Y2] まで [TIME] みりびょうでドラッグする"
   }
 }
